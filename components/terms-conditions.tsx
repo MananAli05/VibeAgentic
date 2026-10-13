@@ -74,8 +74,8 @@ export function TermsConditions() {
 
           <div className="grid gap-8 lg:grid-cols-[280px_1fr] items-start">
             {/* Sticky Table of Contents Sidebar */}
-            <aside className="sticky top-28 hidden lg:block rounded-2xl border border-white/10 bg-[#070d19] p-5 glass-panel">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-cyan-brand mb-4 pb-3 border-b border-white/10">
+            <aside className="sticky top-28 hidden lg:block rounded-2xl border border-foreground/10 bg-white p-5 glass-panel">
+              <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-cyan-brand mb-4 pb-3 border-b border-foreground/10">
                 <List className="size-4" /> Table of Contents
               </div>
               <nav className="flex flex-col gap-1 text-xs max-h-[70vh] overflow-y-auto pr-1">
@@ -86,7 +86,7 @@ export function TermsConditions() {
                     className={`flex items-center justify-between rounded-lg px-3 py-2 text-left font-medium transition-all ${
                       activeId === item.id
                         ? 'bg-cyan-brand/15 text-cyan-brand font-bold border border-cyan-brand/30'
-                        : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'
+                        : 'text-muted-foreground hover:bg-primary/10 hover:text-foreground'
                     }`}
                   >
                     <span>{item.label}</span>
@@ -97,8 +97,8 @@ export function TermsConditions() {
             </aside>
 
             {/* Main Content Area */}
-            <div className="border border-white/10 bg-white/[0.025] rounded-[24px] p-6 md:p-10 shadow-[0_24px_82px_rgba(0,0,0,0.3)] backdrop-blur-md text-foreground font-sans text-sm md:text-base leading-[1.8]">
-              <div className="mb-8 border-b border-white/[0.08] pb-6">
+            <div className="border border-foreground/10 bg-primary/[0.05] rounded-[24px] p-6 md:p-10 shadow-[0_24px_82px_rgba(0,0,0,0.3)] backdrop-blur-md text-foreground font-sans text-sm md:text-base leading-[1.8]">
+              <div className="mb-8 border-b border-foreground/10 pb-6">
                 <p className="text-xs font-mono text-muted-foreground/75 uppercase tracking-wider">
                   Last Updated: February 23, 2026
                 </p>
@@ -108,14 +108,14 @@ export function TermsConditions() {
               </div>
 
               {/* Mobile Quick Navigation */}
-              <div className="mb-8 rounded-xl border border-white/10 bg-white/5 p-4 lg:hidden">
+              <div className="mb-8 rounded-xl border border-foreground/10 bg-primary/[0.05] p-4 lg:hidden">
                 <p className="font-mono text-xs font-bold uppercase text-cyan-brand mb-2 flex items-center gap-2">
                   <List className="size-4" /> Quick Section Jump
                 </p>
                 <select
                   value={activeId}
                   onChange={(e) => scrollToSection(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-[#070d19] px-3 py-2 text-xs font-medium text-foreground focus:outline-none focus:border-cyan-brand"
+                  className="w-full rounded-lg border border-foreground/10 bg-white px-3 py-2 text-xs font-medium text-foreground focus:outline-none focus:border-cyan-brand"
                 >
                   {tocItems.map((item) => (
                     <option key={item.id} value={item.id}>
@@ -135,7 +135,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="notice" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">Important Notice</h2>
@@ -144,7 +144,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-1" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">1. Acceptance of Terms</h2>
@@ -158,7 +158,7 @@ export function TermsConditions() {
                   <p>We reserve the right to refuse access to anyone who violates these Terms or applicable laws.</p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-2" className="space-y-4 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">2. Eligibility and User Responsibilities</h2>
@@ -192,7 +192,7 @@ export function TermsConditions() {
                   </div>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-3" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">3. User Accounts</h2>
@@ -207,7 +207,7 @@ export function TermsConditions() {
                   <p>We reserve the right to suspend or terminate accounts that violate these Terms, contain false information, or have been inactive for an extended period, with or without prior notice.</p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-4" className="space-y-4 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">4. Intellectual Property Rights</h2>
@@ -239,7 +239,7 @@ export function TermsConditions() {
                   </div>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-5" className="space-y-4 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">5. AI Services — Specific Terms</h2>
@@ -261,7 +261,7 @@ export function TermsConditions() {
                   </div>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-6" className="space-y-4 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">6. Payment, Subscription, and Refund Policy</h2>
@@ -282,14 +282,14 @@ export function TermsConditions() {
                   </div>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-7" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">7. Third‑Party Links and Services</h2>
                   <p>The Website may contain links to, or integrate with, third‑party websites. We are not responsible for the content, privacy practices, accuracy, or security of any third‑party services, nor any interactions you have with them.</p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-8" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">8. Disclaimer of Warranties</h2>
@@ -298,7 +298,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-9" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">9. Limitation of Liability</h2>
@@ -307,7 +307,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-10" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">10. Indemnification</h2>
@@ -316,7 +316,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-11" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">11. Termination</h2>
@@ -325,7 +325,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-12" className="space-y-4 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">12. Governing Law and Dispute Resolution</h2>
@@ -346,7 +346,7 @@ export function TermsConditions() {
                   </div>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-13" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">13. Severability and Entire Agreement</h2>
@@ -355,7 +355,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-[#section-14]" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">14. Changes to These Terms</h2>
@@ -364,7 +364,7 @@ export function TermsConditions() {
                   </p>
                 </section>
 
-                <div className="h-px bg-white/[0.06] w-full" />
+                <div className="h-px bg-primary/[0.05] w-full" />
 
                 <section id="section-15" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">15. Contact Information</h2>
@@ -383,7 +383,7 @@ export function TermsConditions() {
           <div className="mt-12 flex justify-center">
             <button
               onClick={() => navigate('/')}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:bg-white hover:text-[#020912] hover:scale-[1.02] active:scale-100 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-primary/[0.05] px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:bg-white hover:text-white hover:scale-[1.02] active:scale-100 cursor-pointer"
             >
               <ArrowLeft className="size-4" />
               Back to Home

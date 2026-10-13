@@ -15,3 +15,5 @@ node_modules
 .DS_Store
 dist/
 *.log
+# Design reference, not part of the site
+referencevideo.mp4

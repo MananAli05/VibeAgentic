@@ -7,7 +7,7 @@ import { sendForm, CONTACT_EMAIL } from '@/lib/send-form'
 import * as React from 'react'
 
 const inputBaseClass =
-  'rounded-xl border bg-white/[0.04] px-3.5 py-2.5 text-sm text-foreground placeholder:text-white/60 transition-all duration-300 focus:bg-white/[0.06] focus:outline-none w-full'
+  'rounded-xl border bg-primary/[0.05] px-3.5 py-2.5 text-sm text-foreground placeholder:text-foreground/40 transition-all duration-300 focus:bg-white focus:outline-none w-full'
 
 export function Contact() {
   const [sent, setSent] = useState(false)
@@ -144,28 +144,28 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative pt-12 pb-8 md:pt-20 md:pb-12 lg:pt-24 lg:pb-16 overflow-hidden px-5 md:px-8">
+    <section id="contact" className="relative section-pad overflow-hidden px-5 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <Reveal className="grid items-stretch gap-8 lg:grid-cols-[4.5fr_5.5fr] lg:gap-12">
-          
-          <div className="flex flex-col justify-center max-w-xl">
-            <h2 className="font-sans text-3xl font-extrabold headline-tight text-foreground md:text-5xl">
-              Let's build your AI system
+        <Reveal className="grid items-center gap-10 lg:grid-cols-[4.5fr_5.5fr] lg:gap-16">
+
+          <div className="max-w-xl">
+            <h2 className="font-sans text-5xl font-extrabold leading-[0.98] headline-tight text-foreground md:text-7xl">
+              Let's build your <span className="text-[#9bb4dc]">AI system.</span>
             </h2>
-            <p className="mt-4 text-sm md:text-base leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
               Tell us what you want to automate or build. We'll recommend the right AI solution for your business
             </p>
           </div>
 
-          <div className="relative w-full max-w-[500px] lg:max-w-none justify-self-center lg:justify-self-end">
+          <div className="relative w-full max-w-[560px] lg:max-w-none justify-self-center lg:justify-self-end">
             <div
               className="pointer-events-none absolute -inset-6 -z-10 blur-2xl opacity-60 rounded-full"
               style={{
-                background: 'radial-gradient(circle at center, rgba(0, 180, 204, 0.15) 0%, transparent 65%)',
+                background: 'radial-gradient(circle at center, rgba(46, 175, 255, 0.28) 0%, transparent 65%)',
               }}
             />
 
-            <div className="rounded-[20px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_82px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.08)] glass-panel md:p-6 mt-24">
+            <div className="card-soft rounded-[2rem] p-6 md:p-8">
               {sent ? (
                 <div className="flex min-h-[260px] flex-col items-center justify-center gap-4 text-center py-6">
                   <span className="flex size-14 items-center justify-center rounded-full border border-cyan-brand/30 bg-cyan-brand/10 text-cyan-brand">
@@ -180,7 +180,7 @@ export function Contact() {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-xs font-bold text-foreground transition-all hover:bg-white/20 cursor-pointer"
+                    className="mt-3 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-primary/[0.05] px-6 py-2.5 text-xs font-bold text-foreground transition-all hover:bg-primary/10 cursor-pointer"
                   >
                     <RotateCcw className="size-3.5" /> Submit Another Request
                   </button>
@@ -205,11 +205,11 @@ export function Contact() {
                         className={`${inputBaseClass} ${
                           errors.name
                             ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                            : 'border-white/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20'
+                            : 'border-foreground/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20'
                         }`}
                       />
                       {errors.name && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.name}
                         </span>
@@ -232,11 +232,11 @@ export function Contact() {
                         className={`${inputBaseClass} ${
                           errors.email
                             ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                            : 'border-white/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20'
+                            : 'border-foreground/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20'
                         }`}
                       />
                       {errors.email && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.email}
                         </span>
@@ -260,11 +260,11 @@ export function Contact() {
                       className={`${inputBaseClass} resize-none leading-relaxed ${
                         errors.message
                           ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30'
-                          : 'border-white/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20'
+                          : 'border-foreground/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20'
                       }`}
                     />
                     {errors.message && (
-                      <span className="flex items-center gap-1 text-[11px] text-red-400">
+                      <span className="flex items-center gap-1 text-[11px] text-red-600">
                         <AlertCircle className="size-3 shrink-0" />
                         {errors.message}
                       </span>
@@ -272,7 +272,7 @@ export function Contact() {
                   </div>
 
                   {sendError && (
-                    <span className="flex items-center gap-1 text-xs text-red-400">
+                    <span className="flex items-center gap-1 text-xs text-red-600">
                       <AlertCircle className="size-3.5 shrink-0" />
                       {sendError}
                     </span>
@@ -281,7 +281,7 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="disabled:opacity-70 disabled:cursor-wait w-full py-3.5 px-6 rounded-full font-extrabold text-sm text-[#020912] bg-white transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.06)] hover:bg-gradient-to-r hover:from-white hover:to-[#d0f5fc] hover:shadow-[0_0_24px_rgba(0,180,204,0.25)] hover:-translate-y-[2px] active:translate-y-0 flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="disabled:opacity-70 disabled:cursor-wait w-full py-3.5 px-6 rounded-full font-extrabold text-sm text-white bg-primary transition-all duration-300 shadow-[0_14px_30px_-12px_rgba(22,103,242,0.7)] hover:bg-gradient-to-r hover:from-primary hover:to-sky-brand hover:shadow-[0_18px_36px_-12px_rgba(22,103,242,0.8)] hover:-translate-y-[2px] active:translate-y-0 flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     {sending ? (
                       <>

@@ -7,7 +7,7 @@ import { useModals } from '@/lib/modal-context'
 import { sendForm, CONTACT_EMAIL } from '@/lib/send-form'
 
 const inputBaseClass =
-  'rounded-xl border bg-[#06101c] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 transition-all duration-300 focus:bg-[#091626] focus:outline-none w-full'
+  'rounded-xl border bg-white px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 transition-all duration-300 focus:bg-white focus:outline-none w-full'
 
 export function ModalManager() {
   const {
@@ -175,7 +175,7 @@ export function ModalManager() {
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-md sm:p-6"
+        className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#0b1a33]/45 p-4 backdrop-blur-md sm:p-6"
         onClick={handleBackdropClick}
       >
         {/* START A PROJECT MODAL */}
@@ -185,11 +185,11 @@ export function ModalManager() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-white/15 bg-[#06111f] p-6 shadow-2xl md:p-8"
+            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-foreground/10 bg-white p-6 shadow-[0_40px_90px_-30px_rgba(11,26,51,0.45)] md:p-8"
           >
             <button
               onClick={closeModal}
-              className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-white/5 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground cursor-pointer"
+              className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-primary/[0.05] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground cursor-pointer"
               aria-label="Close modal"
             >
               <X className="size-5" />
@@ -197,7 +197,7 @@ export function ModalManager() {
 
             {submitted ? (
               <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 text-center">
-                <span className="flex size-14 items-center justify-center rounded-full border border-[#2EAFFF]/30 bg-[#2EAFFF]/10 text-[#2EAFFF]">
+                <span className="flex size-14 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
                   <Check className="size-7" />
                 </span>
                 <h3 className="font-sans text-2xl font-extrabold text-foreground">
@@ -208,7 +208,7 @@ export function ModalManager() {
                 </p>
                 <button
                   onClick={closeModal}
-                  className="mt-4 rounded-full bg-white px-6 py-2.5 text-xs font-bold text-[#020912] transition-opacity hover:opacity-90 cursor-pointer"
+                  className="mt-4 rounded-full bg-primary px-6 py-2.5 text-xs font-bold text-white transition-opacity hover:opacity-90 cursor-pointer"
                 >
                   Close Window
                 </button>
@@ -216,7 +216,7 @@ export function ModalManager() {
             ) : (
               <div>
                 <div className="mb-6">
-                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#2EAFFF]">
+                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
                     Start a Project
                   </span>
                   <h2 className="mt-1 font-sans text-2xl font-extrabold text-foreground md:text-3xl">
@@ -247,11 +247,11 @@ export function ModalManager() {
                         className={`${inputBaseClass} ${
                           errors.name
                             ? 'border-red-500/80 focus:border-red-500'
-                            : 'border-white/10 focus:border-[#2EAFFF]/60'
+                            : 'border-foreground/10 focus:border-primary/60'
                         }`}
                       />
                       {errors.name && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.name}
                         </span>
@@ -276,11 +276,11 @@ export function ModalManager() {
                         className={`${inputBaseClass} ${
                           errors.email
                             ? 'border-red-500/80 focus:border-red-500'
-                            : 'border-white/10 focus:border-[#2EAFFF]/60'
+                            : 'border-foreground/10 focus:border-primary/60'
                         }`}
                       />
                       {errors.email && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.email}
                         </span>
@@ -296,16 +296,16 @@ export function ModalManager() {
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className={`${inputBaseClass} border-white/10 bg-[#06101c] text-white focus:border-[#2EAFFF]/60`}
+                        className={`${inputBaseClass} border-foreground/10 bg-white text-foreground focus:border-primary/60`}
                       >
-                        <option value="Generative AI Integration" className="bg-[#071320] text-white">Generative AI</option>
-                        <option value="RAG Applications" className="bg-[#071320] text-white">RAG Applications</option>
-                        <option value="AI Process Automation" className="bg-[#071320] text-white">AI Automation</option>
-                        <option value="Custom AI Chatbots" className="bg-[#071320] text-white">AI Chatbots</option>
-                        <option value="AI Copilots & Assistants" className="bg-[#071320] text-white">AI Copilots</option>
-                        <option value="LLM Tuning & Training" className="bg-[#071320] text-white">LLM Tuning</option>
-                        <option value="Autonomous AI Agents" className="bg-[#071320] text-white">AI Agents</option>
-                        <option value="Enterprise API Integration" className="bg-[#071320] text-white">API Integration</option>
+                        <option value="Generative AI Integration" className="bg-white text-foreground">Generative AI</option>
+                        <option value="RAG Applications" className="bg-white text-foreground">RAG Applications</option>
+                        <option value="AI Process Automation" className="bg-white text-foreground">AI Automation</option>
+                        <option value="Custom AI Chatbots" className="bg-white text-foreground">AI Chatbots</option>
+                        <option value="AI Copilots & Assistants" className="bg-white text-foreground">AI Copilots</option>
+                        <option value="LLM Tuning & Training" className="bg-white text-foreground">LLM Tuning</option>
+                        <option value="Autonomous AI Agents" className="bg-white text-foreground">AI Agents</option>
+                        <option value="Enterprise API Integration" className="bg-white text-foreground">API Integration</option>
                       </select>
                     </div>
 
@@ -316,12 +316,12 @@ export function ModalManager() {
                       <select
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className={`${inputBaseClass} border-white/10 bg-[#06101c] text-white focus:border-[#2EAFFF]/60`}
+                        className={`${inputBaseClass} border-foreground/10 bg-white text-foreground focus:border-primary/60`}
                       >
-                        <option value="Under $5k" className="bg-[#071320] text-white">Under $5k</option>
-                        <option value="$5k - $15k" className="bg-[#071320] text-white">$5k - $15k</option>
-                        <option value="$15k - $30k" className="bg-[#071320] text-white">$15k - $30k</option>
-                        <option value="$30k+" className="bg-[#071320] text-white">$30k+</option>
+                        <option value="Under $5k" className="bg-white text-foreground">Under $5k</option>
+                        <option value="$5k - $15k" className="bg-white text-foreground">$5k - $15k</option>
+                        <option value="$15k - $30k" className="bg-white text-foreground">$15k - $30k</option>
+                        <option value="$30k+" className="bg-white text-foreground">$30k+</option>
                       </select>
                     </div>
 
@@ -332,11 +332,11 @@ export function ModalManager() {
                       <select
                         value={formData.timeline}
                         onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                        className={`${inputBaseClass} border-white/10 bg-[#06101c] text-white focus:border-[#2EAFFF]/60`}
+                        className={`${inputBaseClass} border-foreground/10 bg-white text-foreground focus:border-primary/60`}
                       >
-                        <option value="ASAP (< 2 weeks)" className="bg-[#071320] text-white">ASAP (&lt; 2 weeks)</option>
-                        <option value="1-2 Months" className="bg-[#071320] text-white">1-2 Months</option>
-                        <option value="3+ Months" className="bg-[#071320] text-white">3+ Months</option>
+                        <option value="ASAP (< 2 weeks)" className="bg-white text-foreground">ASAP (&lt; 2 weeks)</option>
+                        <option value="1-2 Months" className="bg-white text-foreground">1-2 Months</option>
+                        <option value="3+ Months" className="bg-white text-foreground">3+ Months</option>
                       </select>
                     </div>
                   </div>
@@ -359,11 +359,11 @@ export function ModalManager() {
                       className={`${inputBaseClass} resize-none leading-relaxed ${
                         errors.message
                           ? 'border-red-500/80 focus:border-red-500'
-                          : 'border-white/10 focus:border-[#2EAFFF]/60'
+                          : 'border-foreground/10 focus:border-primary/60'
                       }`}
                     />
                     {errors.message && (
-                      <span className="flex items-center gap-1 text-[11px] text-red-400">
+                      <span className="flex items-center gap-1 text-[11px] text-red-600">
                         <AlertCircle className="size-3 shrink-0" />
                         {errors.message}
                       </span>
@@ -371,7 +371,7 @@ export function ModalManager() {
                   </div>
 
                   {sendError && (
-                    <span className="flex items-center gap-1 text-xs text-red-400">
+                    <span className="flex items-center gap-1 text-xs text-red-600">
                       <AlertCircle className="size-3.5 shrink-0" />
                       {sendError}
                     </span>
@@ -380,7 +380,7 @@ export function ModalManager() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="disabled:opacity-70 disabled:cursor-wait mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 text-sm font-bold text-[#020912] transition-all hover:bg-[#eaf8fc] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
+                    className="disabled:opacity-70 disabled:cursor-wait mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-white transition-all hover:bg-[#0f57d8] hover:shadow-[0_14px_30px_-12px_rgba(22,103,242,0.7)] cursor-pointer"
                   >
                     {sending ? <><Loader2 className="size-4 animate-spin" /> Sending...</> : 'Submit Project Details'}
                   </button>
@@ -397,11 +397,11 @@ export function ModalManager() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-[#06111f] p-6 shadow-2xl md:p-8"
+            className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-foreground/10 bg-white p-6 shadow-[0_40px_90px_-30px_rgba(11,26,51,0.45)] md:p-8"
           >
             <button
               onClick={closeModal}
-              className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-white/5 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground cursor-pointer"
+              className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-primary/[0.05] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground cursor-pointer"
               aria-label="Close modal"
             >
               <X className="size-5" />
@@ -409,7 +409,7 @@ export function ModalManager() {
 
             {submitted ? (
               <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 text-center">
-                <span className="flex size-14 items-center justify-center rounded-full border border-[#2EAFFF]/30 bg-[#2EAFFF]/10 text-[#2EAFFF]">
+                <span className="flex size-14 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
                   <Check className="size-7" />
                 </span>
                 <h3 className="font-sans text-2xl font-extrabold text-foreground">
@@ -420,7 +420,7 @@ export function ModalManager() {
                 </p>
                 <button
                   onClick={closeModal}
-                  className="mt-4 rounded-full bg-white px-6 py-2.5 text-xs font-bold text-[#020912] transition-opacity hover:opacity-90 cursor-pointer"
+                  className="mt-4 rounded-full bg-primary px-6 py-2.5 text-xs font-bold text-white transition-opacity hover:opacity-90 cursor-pointer"
                 >
                   Close Window
                 </button>
@@ -428,7 +428,7 @@ export function ModalManager() {
             ) : (
               <div>
                 <div className="mb-6">
-                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#2EAFFF]">
+                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
                     Book a Strategy Call
                   </span>
                   <h2 className="mt-1 font-sans text-2xl font-extrabold text-foreground md:text-3xl">
@@ -459,11 +459,11 @@ export function ModalManager() {
                         className={`${inputBaseClass} ${
                           errors.name
                             ? 'border-red-500/80 focus:border-red-500'
-                            : 'border-white/10 focus:border-[#2EAFFF]/60'
+                            : 'border-foreground/10 focus:border-primary/60'
                         }`}
                       />
                       {errors.name && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.name}
                         </span>
@@ -488,11 +488,11 @@ export function ModalManager() {
                         className={`${inputBaseClass} ${
                           errors.email
                             ? 'border-red-500/80 focus:border-red-500'
-                            : 'border-white/10 focus:border-[#2EAFFF]/60'
+                            : 'border-foreground/10 focus:border-primary/60'
                         }`}
                       />
                       {errors.email && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.email}
                         </span>
@@ -507,12 +507,12 @@ export function ModalManager() {
                     <select
                       value={formData.topic}
                       onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                      className={`${inputBaseClass} border-white/10 bg-[#06101c] text-white focus:border-[#2EAFFF]/60`}
+                      className={`${inputBaseClass} border-foreground/10 bg-white text-foreground focus:border-primary/60`}
                     >
-                      <option value="AI Automation Strategy" className="bg-[#071320] text-white">AI Automation Strategy & Roadmap</option>
-                      <option value="Custom RAG & Enterprise Search" className="bg-[#071320] text-white">Custom RAG & Enterprise Search</option>
-                      <option value="LLM Fine-Tuning & Self-Hosting" className="bg-[#071320] text-white">LLM Fine-Tuning & Self-Hosting</option>
-                      <option value="Autonomous Agent Architecture" className="bg-[#071320] text-white">Autonomous Agent Architecture</option>
+                      <option value="AI Automation Strategy" className="bg-white text-foreground">AI Automation Strategy & Roadmap</option>
+                      <option value="Custom RAG & Enterprise Search" className="bg-white text-foreground">Custom RAG & Enterprise Search</option>
+                      <option value="LLM Fine-Tuning & Self-Hosting" className="bg-white text-foreground">LLM Fine-Tuning & Self-Hosting</option>
+                      <option value="Autonomous Agent Architecture" className="bg-white text-foreground">Autonomous Agent Architecture</option>
                     </select>
                   </div>
 
@@ -531,14 +531,14 @@ export function ModalManager() {
                           if (touched.date) setErrors((prev) => ({ ...prev, date: validateDate(val) }))
                         }}
                         onBlur={() => handleBlur('date')}
-                        className={`${inputBaseClass} bg-[#06101c] text-white ${
+                        className={`${inputBaseClass} bg-white text-foreground ${
                           errors.date
                             ? 'border-red-500/80 focus:border-red-500'
-                            : 'border-white/10 focus:border-[#2EAFFF]/60'
+                            : 'border-foreground/10 focus:border-primary/60'
                         }`}
                       />
                       {errors.date && (
-                        <span className="flex items-center gap-1 text-[11px] text-red-400">
+                        <span className="flex items-center gap-1 text-[11px] text-red-600">
                           <AlertCircle className="size-3 shrink-0" />
                           {errors.date}
                         </span>
@@ -552,12 +552,12 @@ export function ModalManager() {
                       <select
                         value={formData.time}
                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                        className={`${inputBaseClass} border-white/10 bg-[#06101c] text-white focus:border-[#2EAFFF]/60`}
+                        className={`${inputBaseClass} border-foreground/10 bg-white text-foreground focus:border-primary/60`}
                       >
-                        <option value="09:00 AM" className="bg-[#071320] text-white">09:00 AM (EST)</option>
-                        <option value="11:00 AM" className="bg-[#071320] text-white">11:00 AM (EST)</option>
-                        <option value="02:00 PM" className="bg-[#071320] text-white">02:00 PM (EST)</option>
-                        <option value="04:00 PM" className="bg-[#071320] text-white">04:00 PM (EST)</option>
+                        <option value="09:00 AM" className="bg-white text-foreground">09:00 AM (EST)</option>
+                        <option value="11:00 AM" className="bg-white text-foreground">11:00 AM (EST)</option>
+                        <option value="02:00 PM" className="bg-white text-foreground">02:00 PM (EST)</option>
+                        <option value="04:00 PM" className="bg-white text-foreground">04:00 PM (EST)</option>
                       </select>
                     </div>
                   </div>
@@ -571,12 +571,12 @@ export function ModalManager() {
                       placeholder="What topics would you like to cover?"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className={`${inputBaseClass} border-white/10 resize-none focus:border-[#2EAFFF]/60`}
+                      className={`${inputBaseClass} border-foreground/10 resize-none focus:border-primary/60`}
                     />
                   </div>
 
                   {sendError && (
-                    <span className="flex items-center gap-1 text-xs text-red-400">
+                    <span className="flex items-center gap-1 text-xs text-red-600">
                       <AlertCircle className="size-3.5 shrink-0" />
                       {sendError}
                     </span>
@@ -585,7 +585,7 @@ export function ModalManager() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="disabled:opacity-70 disabled:cursor-wait mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 text-sm font-bold text-[#020912] transition-all hover:bg-[#eaf8fc] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
+                    className="disabled:opacity-70 disabled:cursor-wait mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-white transition-all hover:bg-[#0f57d8] hover:shadow-[0_14px_30px_-12px_rgba(22,103,242,0.7)] cursor-pointer"
                   >
                     {sending ? <><Loader2 className="size-4 animate-spin" /> Sending...</> : <>Confirm & Reserve Call Slot <Calendar className="size-4" /></>}
                   </button>
@@ -602,24 +602,24 @@ export function ModalManager() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#06111f] p-6 shadow-2xl md:p-8"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-foreground/10 bg-white p-6 shadow-[0_40px_90px_-30px_rgba(11,26,51,0.45)] md:p-8"
           >
             <button
               onClick={closeModal}
-              className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-white/5 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground cursor-pointer"
+              className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-primary/[0.05] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground cursor-pointer"
               aria-label="Close modal"
             >
               <X className="size-5" />
             </button>
 
             <div className="mb-6">
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#8FEAFF]">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
                 Service Overview • {selectedService.num}
               </span>
               <h2 className="mt-1 font-sans text-2xl font-extrabold text-foreground md:text-3xl">
                 {selectedService.title}
               </h2>
-              <p className="mt-2 text-base font-medium text-[#49F2B2]">
+              <p className="mt-2 text-base font-medium text-primary">
                 {selectedService.hook}
               </p>
               <p className="mt-3 leading-relaxed text-muted-foreground text-sm md:text-base">
@@ -627,7 +627,7 @@ export function ModalManager() {
               </p>
             </div>
 
-            <div className="space-y-6 border-t border-white/10 pt-6">
+            <div className="space-y-6 border-t border-foreground/10 pt-6">
               {/* Features */}
               <div>
                 <h4 className="font-sans text-xs font-bold text-foreground uppercase tracking-wider text-muted-foreground mb-3">
@@ -635,7 +635,7 @@ export function ModalManager() {
                 </h4>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {selectedService.features.map((feat, i) => (
-                    <div key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-3.5 text-xs font-medium leading-relaxed text-foreground/90">
+                    <div key={i} className="rounded-xl border border-foreground/10 bg-primary/[0.05] p-3.5 text-xs font-medium leading-relaxed text-foreground/90">
                       {feat}
                     </div>
                   ))}
@@ -649,7 +649,7 @@ export function ModalManager() {
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedService.techStack.map((tech) => (
-                    <span key={tech} className="rounded-lg border border-[#2EAFFF]/40 bg-[#2EAFFF]/10 px-3 py-1.5 text-xs font-semibold text-[#8FEAFF]">
+                    <span key={tech} className="rounded-lg border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
                       {tech}
                     </span>
                   ))}
@@ -663,7 +663,7 @@ export function ModalManager() {
                 </h4>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {selectedService.deliverables.map((del, i) => (
-                    <div key={i} className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-xs font-semibold text-foreground">
+                    <div key={i} className="rounded-xl border border-foreground/10 bg-primary/[0.05] px-4 py-3 text-xs font-semibold text-foreground">
                       {del}
                     </div>
                   ))}
@@ -672,16 +672,16 @@ export function ModalManager() {
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end border-t border-white/10 pt-6">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end border-t border-foreground/10 pt-6">
               <button
                 onClick={() => openStrategyCall()}
-                className="rounded-full border border-white/20 bg-white/5 px-6 py-3 text-xs font-bold text-foreground transition-colors hover:bg-white/10 cursor-pointer"
+                className="rounded-full border border-foreground/10 bg-primary/[0.05] px-6 py-3 text-xs font-bold text-foreground transition-colors hover:bg-primary/10 cursor-pointer"
               >
                 Book Strategy Call
               </button>
               <button
                 onClick={() => openStartProject(selectedService.title)}
-                className="rounded-full bg-white px-7 py-3 text-xs font-extrabold text-[#020912] transition-all hover:bg-[#eaf8fc] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
+                className="rounded-full bg-primary px-7 py-3 text-xs font-extrabold text-white transition-all hover:bg-[#0f57d8] hover:shadow-[0_14px_30px_-12px_rgba(22,103,242,0.7)] cursor-pointer"
               >
                 Start a Project with this Service
               </button>
@@ -696,25 +696,25 @@ export function ModalManager() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#06111f] p-6 shadow-2xl md:p-8"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-foreground/10 bg-white p-6 shadow-[0_40px_90px_-30px_rgba(11,26,51,0.45)] md:p-8"
           >
             <button
               onClick={closeModal}
-              className="absolute right-5 top-5 z-20 flex size-9 items-center justify-center rounded-full bg-black/50 text-muted-foreground backdrop-blur-md transition-colors hover:bg-black/80 hover:text-foreground cursor-pointer"
+              className="absolute right-5 top-5 z-20 flex size-9 items-center justify-center rounded-full bg-[#0b1a33]/30 text-muted-foreground backdrop-blur-md transition-colors hover:bg-[#0b1a33]/45 hover:text-foreground cursor-pointer"
               aria-label="Close modal"
             >
               <X className="size-5" />
             </button>
 
-            <div className="relative mb-6 h-48 w-full overflow-hidden rounded-xl border border-white/10">
+            <div className="relative mb-6 h-48 w-full overflow-hidden rounded-xl border border-foreground/10">
               <img
                 src={selectedIndustry.image}
                 alt={selectedIndustry.alt}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#06111f] via-[#06111f]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#2EAFFF]">
+                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
                   Industry Focus
                 </span>
                 <h2 className="font-sans text-3xl font-extrabold text-foreground">
@@ -727,7 +727,7 @@ export function ModalManager() {
               {selectedIndustry.overview}
             </p>
 
-            <div className="mt-6 space-y-6 border-t border-white/10 pt-6">
+            <div className="mt-6 space-y-6 border-t border-foreground/10 pt-6">
               {/* Use Cases */}
               <div>
                 <h4 className="font-sans text-xs font-bold text-foreground uppercase tracking-wider text-muted-foreground mb-3">
@@ -735,7 +735,7 @@ export function ModalManager() {
                 </h4>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {selectedIndustry.useCases.map((uc, i) => (
-                    <div key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-3.5 text-xs font-medium leading-relaxed text-foreground/90">
+                    <div key={i} className="rounded-xl border border-foreground/10 bg-primary/[0.05] p-3.5 text-xs font-medium leading-relaxed text-foreground/90">
                       {uc}
                     </div>
                   ))}
@@ -749,7 +749,7 @@ export function ModalManager() {
                 </h4>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {selectedIndustry.keyBenefits.map((ben, i) => (
-                    <div key={i} className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-xs font-semibold text-foreground">
+                    <div key={i} className="rounded-xl border border-foreground/10 bg-primary/[0.05] px-4 py-3 text-xs font-semibold text-foreground">
                       {ben}
                     </div>
                   ))}
@@ -757,17 +757,17 @@ export function ModalManager() {
               </div>
 
               {/* Compliance & Security */}
-              <div className="rounded-xl border border-[#2EAFFF]/30 bg-[#2EAFFF]/5 p-4 text-xs leading-relaxed text-muted-foreground">
+              <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 text-xs leading-relaxed text-muted-foreground">
                 <strong className="block font-semibold text-foreground mb-1">Security & Compliance</strong>
                 <span>{selectedIndustry.complianceNote}</span>
               </div>
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end border-t border-white/10 pt-6">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end border-t border-foreground/10 pt-6">
               <button
                 onClick={() => openStrategyCall()}
-                className="rounded-full bg-white px-7 py-3 text-xs font-extrabold text-[#020912] transition-all hover:bg-[#eaf8fc] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
+                className="rounded-full bg-primary px-7 py-3 text-xs font-extrabold text-white transition-all hover:bg-[#0f57d8] hover:shadow-[0_14px_30px_-12px_rgba(22,103,242,0.7)] cursor-pointer"
               >
                 Schedule {selectedIndustry.title} Strategy Call
               </button>

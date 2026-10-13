@@ -1,16 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { LatticeBackground } from '@/components/lattice-background'
 import { SmoothScroll } from '@/components/smooth-scroll'
 import { SiteNav } from '@/components/site-nav'
-import { Hero } from '@/components/hero'
+import { Hero, TechStack } from '@/components/hero'
 import { About } from '@/components/about'
 import { Process } from '@/components/process'
 import { Services } from '@/components/services'
 import { Industries } from '@/components/industries'
 import { Team } from '@/components/team'
 import { Testimonials } from '@/components/testimonials'
+import { Faq } from '@/components/faq'
 import { Contact } from '@/components/contact'
 import { Footer } from '@/components/footer'
 import { PrivacyPolicy } from '@/components/privacy-policy'
@@ -38,8 +38,6 @@ export default function App() {
   return (
     <ModalProvider>
       <SmoothScroll>
-        <div className="noise-overlay" />
-        <LatticeBackground />
         <SiteNav />
         <main className="relative z-10">
           {currentPath === '/privacy-policy' ? (
@@ -50,11 +48,13 @@ export default function App() {
             <>
               <Hero />
               <About />
-              <Process />
+              <TechStack />
               <Services />
+              <Process />
               <Industries />
-              <Team />
               <Testimonials />
+              <Team />
+              <Faq />
               <Contact />
             </>
           )}

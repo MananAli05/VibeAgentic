@@ -1,28 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Menu, X, ChevronRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
 import { navigate, scrollToSection } from '@/lib/router'
 import { useModals } from '@/lib/modal-context'
 import { BrandLogo } from '@/components/brand-logo'
+import { ArrowButton } from '@/components/ui/arrow-button'
 import * as React from 'react'
 
 const links = [
-  { href: '#top', label: 'Home', hasChevron: false },
-  { href: '#services', label: 'Services', hasChevron: true },
-  { href: '#industries', label: 'Industries', hasChevron: true },
-  { href: '#process', label: 'Process', hasChevron: true },
-  { href: '#team', label: 'Team', hasChevron: false },
-  { href: '#contact', label: 'Contact', hasChevron: false },
+  { href: '#top', label: 'Home' },
+  { href: '#services', label: 'Services' },
+  { href: '#process', label: 'Process' },
+  { href: '#industries', label: 'Industries' },
+  { href: '#team', label: 'Team' },
+  { href: '#contact', label: 'Contact' },
 ]
-
-function NavbarLogo({ mobile = false }: { mobile?: boolean }) {
-  return <BrandLogo size={mobile ? 30 : 36} />
-}
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
   const { openStrategyCall } = useModals()
 
   useEffect(() => {
@@ -43,14 +42,43 @@ export function SiteNav() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+    const onPointerDown = (e: PointerEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
     return () => {
-      document.body.style.overflow = ''
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
     }
   }, [open])
 
+  // Hover-to-open for mouse users; a short close delay lets the cursor cross the gap to the dropdown
+  const closeTimer = useRef<number | undefined>(undefined)
+  const handlePointerEnter = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return
+    window.clearTimeout(closeTimer.current)
+    setOpen(true)
+  }
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return
+    closeTimer.current = window.setTimeout(() => setOpen(false), 220)
+  }
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
+
+  const handleMenuClick = () => {
+    // With a mouse the menu is already open from hover, so a click should not toggle it shut
+    if (window.matchMedia('(hover: hover)').matches) setOpen(true)
+    else setOpen((v) => !v)
+  }
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
+    setOpen(false)
     if (window.location.pathname !== '/') {
       navigate('/')
       setTimeout(() => {
@@ -73,126 +101,97 @@ export function SiteNav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-white/10 bg-[#020a13]/80 backdrop-blur-md py-3'
-          : 'bg-transparent py-5'
+        scrolled ? 'border-b border-foreground/[0.06] bg-background/80 py-2.5 backdrop-blur-md' : 'bg-transparent py-4'
       }`}
     >
-      <a
-        href="#top"
-        onClick={handleLogoClick}
-        className="absolute top-1/2 left-[max(1.5rem,calc((100vw-80rem)/2))] -translate-y-1/2 transition-opacity hover:opacity-90 md:left-[max(3rem,calc((100vw-80rem)/2))]"
-        aria-label="VibeAgentic home"
-      >
-        <NavbarLogo />
-      </a>
-
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-12"
+        className="relative mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 md:px-8"
       >
-        <span className="invisible shrink-0" aria-hidden="true">
-          <NavbarLogo />
-        </span>
-
-        <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] px-2 py-1.5 glass-panel md:flex">
-          {links.filter((l) => l.href !== '#top').map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className="rounded-full px-4 py-1.5 text-xs font-semibold text-muted-foreground transition-all duration-200 hover:bg-white/10 hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        <div className="hidden items-center md:block">
-          <button
-            type="button"
-            onClick={() => openStrategyCall()}
-            className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-foreground px-6 py-2.5 text-xs font-bold text-background transition-all duration-300 hover:bg-foreground/90 hover:scale-[1.02] shadow-[0_0_20px_rgba(46,175,255,0.2)] cursor-pointer"
-          >
-            Book a Strategy Call
-          </button>
-        </div>
-
-        <button
-          type="button"
-          className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-foreground transition-all hover:bg-white/15 md:hidden"
-          aria-expanded={open}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((v) => !v)}
+        <a
+          href="#top"
+          onClick={handleLogoClick}
+          className="shrink-0 transition-opacity hover:opacity-85"
+          aria-label="VibeAgentic home"
         >
-          <Menu className="size-5" />
-        </button>
-      </nav>
+          <span className="hidden sm:block"><BrandLogo size={34} /></span>
+          <span className="sm:hidden"><BrandLogo size={28} /></span>
+        </a>
 
-      {/* Clean, Authentic Mobile Menu matching reference design */}
-      {open && (
-        <div className="fixed inset-0 z-50 flex flex-col justify-between bg-[#051624] px-7 py-8 text-white md:hidden">
-          {/* Top Bar with Header Logo & Top-Right Close Icon */}
-          <div className="flex items-center justify-between">
-            <a
-              href="#top"
-              onClick={(e) => {
-                handleLogoClick(e)
-                setOpen(false)
-              }}
-              className="flex items-center"
-              aria-label="VibeAgentic home"
-            >
-              <NavbarLogo mobile />
-            </a>
+        {/* Floating menu pill + dropdown */}
+        <div
+          ref={menuRef}
+          onPointerEnter={handlePointerEnter}
+          onPointerLeave={handlePointerLeave}
+          className="md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+        >
+          <div className="flex items-center gap-4 rounded-2xl border border-foreground/[0.07] bg-white py-1.5 pl-1.5 pr-1.5 shadow-[0_10px_30px_-14px_rgba(22,103,242,0.4)] sm:pr-4">
             <button
               type="button"
-              className="flex size-10 items-center justify-center text-white transition-opacity hover:opacity-80"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              onClick={handleMenuClick}
+              className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-foreground transition-colors hover:bg-tint cursor-pointer"
             >
-              <X className="size-7" />
+              {open ? <X className="size-4" aria-hidden="true" /> : <Menu className="size-4" aria-hidden="true" />}
+              {open ? 'Close' : 'Menu'}
             </button>
+            <span className="hidden items-center gap-2 text-xs font-bold text-foreground/75 sm:inline-flex">
+              <span className="pulse-dot size-2 rounded-full bg-sky-brand" />
+              Taking New Projects
+            </span>
           </div>
 
-          {/* Vertical Menu Link List - Positioned near top */}
-          <div className="mt-6 flex flex-col space-y-4 pt-2">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  handleLinkClick(e, link.href)
-                  setOpen(false)
-                }}
-                className="group flex items-center justify-between text-left transition-colors"
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                id="site-menu"
+                initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute right-5 top-full mt-2 w-[min(20rem,calc(100vw-2.5rem))] origin-top rounded-3xl border border-foreground/[0.07] bg-white p-3 shadow-[0_30px_70px_-24px_rgba(22,103,242,0.55)] md:left-1/2 md:right-auto md:-translate-x-1/2"
               >
-                <span className="font-sans text-xl font-bold tracking-tight text-white transition-colors group-hover:text-[#8FEAFF]">
-                  {link.label}
-                </span>
-                {link.hasChevron && (
-                  <ChevronRight className="size-5 text-[#2EAFFF] transition-transform group-hover:translate-x-1" />
-                )}
-              </a>
-            ))}
-          </div>
-
-          {/* Bottom Action Floating Pill */}
-          <div className="pt-6">
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false)
-                openStrategyCall()
-              }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 font-sans text-sm font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 cursor-pointer"
-            >
-              <span>Book a Strategy Call</span>
-              <ChevronRight className="size-4 text-[#8FEAFF]" />
-            </button>
-          </div>
+                <ul className="flex flex-col">
+                  {links.map((link, i) => (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.03 * i + 0.05, duration: 0.25 }}
+                    >
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleLinkClick(e, link.href)}
+                        className="block rounded-2xl px-4 py-2 text-center text-2xl font-bold headline-tight text-foreground/55 transition-colors hover:bg-tint hover:text-primary"
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+                <div className="mt-2 border-t border-foreground/[0.07] pt-3 md:hidden">
+                  <ArrowButton
+                    className="w-full"
+                    onClick={() => {
+                      setOpen(false)
+                      openStrategyCall()
+                    }}
+                  >
+                    Book a Strategy Call
+                  </ArrowButton>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      )}
+
+        <div className="hidden md:block">
+          <ArrowButton size="sm" onClick={() => openStrategyCall()}>
+            Book a Call
+          </ArrowButton>
+        </div>
+      </nav>
     </header>
   )
 }

@@ -1,184 +1,159 @@
 'use client'
 
-import { Reveal } from '@/components/reveal'
+import { useEffect, useRef, useState } from 'react'
+import { motion, MotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from 'framer-motion'
+import { ArrowButton } from '@/components/ui/arrow-button'
 import { useModals, IndustryDetail } from '@/lib/modal-context'
+import { industries } from '@/components/industries-data'
 
-const industries: IndustryDetail[] = [
-  {
-    title: 'Healthcare',
-    desc: 'AI tools for patient support, records, reports, and appointment automation.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80',
-    alt: 'Clinician using digital healthcare tools in a modern medical setting',
-    overview: 'Transform healthcare operational efficiency with HIPAA-aware AI assistants. We build intake bots, patient triage workflows, clinical report summarizers, and automated appointment scheduling systems.',
-    useCases: [
-      'Automated patient intake & symptom pre-screening',
-      'EHR & clinical transcript summarization',
-      'Insurance pre-authorization & billing document parsing',
-      '24/7 patient portal Q&A chatbot',
-    ],
-    keyBenefits: [
-      'Reduces clinician charting time by 45%',
-      'Eliminates appointment scheduling bottlenecks',
-      'Zero error rate in document data extraction',
-    ],
-    complianceNote: 'All healthcare AI architectures strictly adhere to HIPAA data processing standards, encrypted data transit (TLS 1.3), and zero data-retention model endpoints.',
-  },
-  {
-    title: 'Finance',
-    desc: 'AI systems for fraud detection, document analysis, and customer support.',
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=900&q=80',
-    alt: 'Financial analyst discussing AI data insights in a modern office',
-    overview: 'Accelerate financial decision-making with automated invoice processing, real-time fraud pattern detection, automated earnings report analysis, and wealth advisory chatbots.',
-    useCases: [
-      'Automated invoice & receipt parsing with OCR + LLMs',
-      'Fraud anomaly detection in transaction streams',
-      'Regulatory compliance document auditing',
-      'Client onboarding & KYC document extraction',
-    ],
-    keyBenefits: [
-      '95%+ speedup in invoice processing time',
-      'Automated flagging of compliance anomalies',
-      '24/7 instant client inquiry response',
-    ],
-    complianceNote: 'Built with SOC2 Type II audit readiness, bank-grade AES-256 field-level encryption, and strict audit logging.',
-  },
-  {
-    title: 'Education',
-    desc: 'AI tutors, learning assistants, and student support systems.',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
-    alt: 'Students using digital learning platforms together',
-    overview: 'Empower educational institutions and EdTech platforms with personalized 24/7 AI tutors, automated assignment grading assistants, and student enrollment bots.',
-    useCases: [
-      'Interactive AI tutors tailored to course syllabi',
-      'Automated assignment feedback & rubric evaluation',
-      'Student enrollment & campus directory bot',
-      'Multilingual learning assistants',
-    ],
-    keyBenefits: [
-      'Provides personalized 1-on-1 tutoring at scale',
-      'Saves educators 10+ hours per week on grading',
-      'Increases student course completion rates',
-    ],
-    complianceNote: 'Compliant with FERPA guidelines for student privacy and data protection.',
-  },
-  {
-    title: 'Real Estate',
-    desc: 'AI chatbots, lead handling, property search, and client automation.',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80',
-    alt: 'Real estate professional presenting property insights digitally',
-    overview: 'Supercharge real estate agencies and platforms with instant lead qualification bots, intelligent property matching, automated tour scheduling, and lease agreement analysis.',
-    useCases: [
-      '24/7 inbound property lead qualification on WhatsApp & Web',
-      'Natural language property search & recommendation engine',
-      'Automated tour scheduling & calendar syncing',
-      'Lease document parsing & clause extraction',
-    ],
-    keyBenefits: [
-      'Capture 100% of off-hours inbound buyer leads',
-      'Instant property brochure & specs delivery',
-      'Reduces agent response time from hours to seconds',
-    ],
-    complianceNote: 'Includes full audit history for all buyer communication and automated consent handling.',
-  },
-  {
-    title: 'E-commerce',
-    desc: 'AI product recommendations, support bots, and order automation.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80',
-    alt: 'Customer engaging with digital retail experience',
-    overview: 'Drive higher conversion and lower support overhead with conversational shopping concierges, dynamic product recommendation agents, and automated order status tracking.',
-    useCases: [
-      'Conversational AI shopping assistant & size advisor',
-      'Automated WISMO (Where Is My Order) status lookup',
-      'Dynamic AI product description & marketing generator',
-      'Automated return & exchange request handling',
-    ],
-    keyBenefits: [
-      'Reduces support ticket volume by up to 60%',
-      'Increases average order value (AOV) via smart upsells',
-      '24/7 multilingual shopper assistance',
-    ],
-    complianceNote: 'Fully GDPR compliant with customer data privacy controls and secure platform integrations (Shopify, WooCommerce, Magento).',
-  },
-  {
-    title: 'Manufacturing',
-    desc: 'AI for process automation, monitoring, and predictive maintenance.',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80',
-    alt: 'Automation engineer inspecting smart factory floor with tablet',
-    overview: 'Bridge shop-floor operations with intelligent AI reporting. We build predictive maintenance log analyzers, inventory anomaly detection, and automated safety compliance reporting tools.',
-    useCases: [
-      'Predictive maintenance log analysis & component risk scoring',
-      'Supply chain inventory anomaly detection',
-      'Automated safety inspection report generation',
-      'Floor manager voice-to-text operational logging',
-    ],
-    keyBenefits: [
-      'Prevents costly unplanned machinery downtime',
-      'Accelerates shift log reporting',
-      'Optimizes supply chain re-order points',
-    ],
-    complianceNote: 'Designed for air-gapped or hybrid cloud deployment on industrial control networks.',
-  },
-]
+// Angle between neighbouring cards on the helix
+const STEP_ANGLE = 48
+
+interface HelixSize {
+  width: number
+  height: number
+  radius: number
+  rise: number
+}
+
+const helixDesktop: HelixSize = { width: 500, height: 340, radius: 600, rise: 96 }
+
+/** Card and spiral dimensions that fit the current viewport. */
+function helixFor(vw: number, vh: number): HelixSize {
+  if (vw < 640) {
+    return { width: Math.min(280, vw - 64), height: Math.round(Math.min(370, vh * 0.48)), radius: 330, rise: 64 }
+  }
+  if (vw < 1024) return { width: 420, height: 300, radius: 470, rise: 80 }
+  return helixDesktop
+}
+
+/** One step of the spiral staircase: its angle and height follow how far it is from the front. */
+function HelixCard({
+  industry,
+  index,
+  total,
+  progress,
+  size,
+  onOpen,
+}: {
+  industry: IndustryDetail
+  index: number
+  total: number
+  progress: MotionValue<number>
+  size: HelixSize
+  onOpen: () => void
+}) {
+  // 0 = front and centre; negative = already passed (up and to the left); positive = still to come
+  const offset = useTransform(progress, (v) => index - v * (total - 1))
+  const transform = useTransform(
+    offset,
+    (d) =>
+      `translate(-50%, -50%) translateZ(${-size.radius}px) rotateY(${d * STEP_ANGLE}deg) translateZ(${size.radius}px) translateY(${d * size.rise}px)`
+  )
+  const opacity = useTransform(offset, (d) => Math.max(0, Math.min(1, 1.3 - Math.abs(d) * 0.5)))
+  const filter = useTransform(offset, (d) => `blur(${Math.min(4, Math.max(0, Math.abs(d) - 0.6) * 2.5)}px)`)
+  const zIndex = useTransform(offset, (d) => 100 - Math.round(Math.abs(d) * 10))
+  const pointerEvents = useTransform(offset, (d) => (Math.abs(d) < 0.5 ? 'auto' : 'none'))
+  const detailOpacity = useTransform(offset, (d) => Math.max(0, 1 - Math.abs(d) * 2.2))
+
+  return (
+    <motion.article
+      style={{ transform, opacity, filter, zIndex, pointerEvents, width: size.width, height: size.height }}
+      className="absolute left-1/2 top-1/2 overflow-hidden rounded-[1.75rem] border border-white/25 bg-[#0b3fc4] shadow-[0_40px_80px_-30px_rgba(4,20,80,0.75)] [backface-visibility:hidden]"
+    >
+      <img src={industry.image} alt={industry.alt} decoding="async" fetchPriority="low" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a3ab8] via-[#0d4fd8]/55 to-[#1667f2]/10" />
+
+      <div className="relative flex h-full flex-col justify-between p-5 text-white sm:p-7">
+        <span className="w-fit rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] font-bold text-primary">
+          {`// 0${index + 1}`}
+        </span>
+        <div>
+          <h3 className="font-sans text-3xl font-extrabold headline-tight drop-shadow-sm sm:text-4xl">{industry.title}</h3>
+          <motion.div style={{ opacity: detailOpacity }}>
+            <p className="mt-2 max-w-sm text-sm font-medium leading-relaxed text-white/90">{industry.desc}</p>
+            <ArrowButton variant="light" size="sm" className="mt-4" onClick={onOpen}>
+              Learn More
+            </ArrowButton>
+          </motion.div>
+        </div>
+      </div>
+    </motion.article>
+  )
+}
 
 export function Industries() {
   const { openIndustryDetail } = useModals()
+  const ref = useRef<HTMLElement>(null)
+  const [active, setActive] = useState(0)
+  const [size, setSize] = useState<HelixSize>(helixDesktop)
+  const total = industries.length
+
+  useEffect(() => {
+    const update = () => setSize(helixFor(window.innerWidth, window.innerHeight))
+    update()
+    window.addEventListener('resize', update, { passive: true })
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  // Hold the first and last cards at the front for a moment at each end of the pinned scroll
+  const eased = useTransform(scrollYProgress, [0.06, 0.94], [0, 1], { clamp: true })
+  const progress = useSpring(eased, { stiffness: 80, damping: 22, mass: 0.6 })
+
+  useMotionValueEvent(progress, 'change', (v) => {
+    setActive(Math.min(total - 1, Math.max(0, Math.round(v * (total - 1)))))
+  })
 
   return (
-    <section id="industries" className="relative section-pad px-5 md:px-8 border-t border-white/[0.08] bg-[#020a12]/80">
-      <div className="pointer-events-none absolute right-[8%] top-24 -z-10 h-[420px] w-[420px] rounded-full bg-[#00B4CC]/10 blur-3xl" />
+    // Tall section: the panel stays pinned while scrolling winds the cards around the spiral
+    <section ref={ref} id="industries" className="relative" style={{ height: `${total * 70 + 60}vh` }}>
+      <div className="sticky top-0 h-svh p-3 md:p-5">
+        <div className="panel-blue relative h-full overflow-hidden rounded-[2rem] md:rounded-[2.75rem]">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_58%,rgba(124,200,255,0.35),transparent)]" />
 
-      <div className="mx-auto max-w-7xl">
-        <Reveal variant="fade-up" className="mb-12 max-w-3xl">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-[#8FEAFF]">Domain Expertise</p>
-          <h2 className="font-sans text-3xl font-extrabold headline-tight text-balance md:text-5xl">
-            Built for the way your industry actually works
-          </h2>
-        </Reveal>
+          <header className="pointer-events-none relative z-[200] px-6 pt-20 md:px-12 md:pt-24">
+            <h2 className="max-w-2xl font-sans text-[1.65rem] font-extrabold leading-[1.02] headline-tight text-balance md:text-5xl">
+              Built for the way your industry <span className="text-[#a9dcff]">actually works.</span>
+            </h2>
+          </header>
 
-        <Reveal
-          variant="slide-left"
-          stagger="[data-card]"
-          staggerSpeed={0.08}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {industries.map((industry) => (
-            <article
-              key={industry.title}
-              data-card
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] shadow-lg glass-panel transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#2EAFFF]/40 hover:bg-white/[0.07]"
-            >
-              {/* Image Frame - Clear, crisp, and high-visibility */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-white/10 bg-[#06111f]">
-                <img
-                  src={industry.image}
-                  alt={industry.alt}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-1.05"
+          {/* 3D stage */}
+          <div className="absolute inset-0 top-[18%] sm:top-[10%] [perspective:1500px]">
+            <div className="absolute inset-0 [transform-style:preserve-3d]">
+              {industries.map((industry, i) => (
+                <HelixCard
+                  key={industry.title}
+                  industry={industry}
+                  index={i}
+                  total={total}
+                  progress={progress}
+                  size={size}
+                  onOpen={() => openIndustryDetail(industry)}
                 />
-                {/* Subtle bottom shadow gradient to elevate title contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#040e19]/70 via-transparent to-transparent" />
-              </div>
+              ))}
+            </div>
+          </div>
 
-              {/* Card Body */}
-              <div className="flex flex-1 flex-col p-5 sm:p-6">
-                <h3 className="font-sans text-lg font-extrabold text-foreground group-hover:text-[#8FEAFF] transition-colors">
-                  {industry.title}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground/90">
-                  {industry.desc}
-                </p>
-
-                <button
-                  type="button"
-                  onClick={() => openIndustryDetail(industry)}
-                  className="mt-auto inline-flex pt-5 text-xs font-bold text-[#8FEAFF] transition-colors duration-300 hover:text-[#49F2B2] cursor-pointer text-left"
-                >
-                  Learn More
-                </button>
-              </div>
-            </article>
-          ))}
-        </Reveal>
+          <footer className="absolute inset-x-0 bottom-0 z-[200] flex items-center justify-between gap-4 px-6 pb-6 md:px-12 md:pb-8">
+            <span className="hidden font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 sm:block">
+              Scroll to explore
+            </span>
+            <div className="flex items-center gap-1.5" aria-hidden="true">
+              {industries.map((industry, i) => (
+                <span
+                  key={industry.title}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === active ? 'w-8 bg-white' : 'w-1.5 bg-white/35'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="font-mono text-xs font-bold text-white/80" aria-live="polite">
+              0{active + 1} / 0{total} <span className="hidden text-white/55 sm:inline">· {industries[active].title}</span>
+            </span>
+          </footer>
+        </div>
       </div>
     </section>
   )

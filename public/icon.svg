@@ -1,26 +1,18 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="brand-grad" x1="4" y1="6" x2="44" y2="42" gradientUnits="userSpaceOnUse">
+    <linearGradient id="tile-grad" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#2eafff" />
-      <stop offset="55%" stop-color="#00b4cc" />
-      <stop offset="100%" stop-color="#49f2b2" />
+      <stop offset="100%" stop-color="#0b3fc4" />
     </linearGradient>
-    <radialGradient id="glow-grad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00b4cc" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#020912" stop-opacity="0" />
-    </radialGradient>
   </defs>
 
-  <!-- Background Dark Rounded Square -->
-  <rect width="180" height="180" rx="42" fill="#020912" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
-
-  <!-- Radial Glow Behind Icon -->
-  <circle cx="90" cy="90" r="75" fill="url(#glow-grad)" />
+  <!-- Blue rounded tile -->
+  <rect width="180" height="180" rx="42" fill="url(#tile-grad)" />
 
   <!-- VibeAgentic "V" mark with pulse wave and agent node (48-unit mark scaled into the tile) -->
   <g transform="translate(30 30) scale(2.5)">
-    <path d="M5 8h9.5L24 31.5 33.5 8H43L28.6 41.5a5 5 0 0 1-9.2 0L5 8Z" fill="url(#brand-grad)" />
-    <path d="M9 22h7l2.5-5 4 10 3-7 2 3H39" stroke="#020912" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-    <circle cx="39" cy="23" r="3.2" fill="#49f2b2" stroke="#020912" stroke-width="1.6" />
+    <path d="M5 8h9.5L24 31.5 33.5 8H43L28.6 41.5a5 5 0 0 1-9.2 0L5 8Z" fill="#ffffff" />
+    <path d="M9 22h7l2.5-5 4 10 3-7 2 3H39" stroke="#1667f2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="39" cy="23" r="3.2" fill="#ffffff" stroke="#1667f2" stroke-width="1.6" />
   </g>
 </svg>
