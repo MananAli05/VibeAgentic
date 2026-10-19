@@ -332,12 +332,12 @@ export function TermsConditions() {
                   
                   <div className="space-y-3">
                     <h3 className="text-base font-bold text-foreground/90">12.1 Governing Law</h3>
-                    <p>These Terms and any disputes arising out of them shall be governed by and construed in accordance with the laws of Pakistan, without regard to conflict of law provisions.</p>
+                    <p>These Terms and any disputes arising out of them shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to conflict of law provisions.</p>
                   </div>
 
                   <div className="space-y-3 pt-2">
                     <h3 className="text-base font-bold text-foreground/90">12.2 Dispute Resolution</h3>
-                    <p>In the event of a dispute, both parties agree to first attempt informal resolution by contacting <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a>. If unresolved after 30 days, we agree to pursue mediation before submitting to the exclusive jurisdiction of the courts in Lahore, Pakistan.</p>
+                    <p>In the event of a dispute, both parties agree to first attempt informal resolution by contacting <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a>. If unresolved after 30 days, we agree to pursue mediation before submitting to the exclusive jurisdiction of the state and federal courts located in Philadelphia, Pennsylvania.</p>
                   </div>
 
                   <div className="space-y-3 pt-2">

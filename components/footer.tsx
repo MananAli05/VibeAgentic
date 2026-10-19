@@ -73,13 +73,13 @@ export function Footer() {
               </div>
 
               <div className="mt-8 flex flex-col gap-2.5 text-sm font-semibold text-white/80">
-                <a href="tel:+923126938208" className="inline-flex w-fit items-center gap-2.5 transition-colors hover:text-white">
+                <a href="tel:+12157673816" className="inline-flex w-fit items-center gap-2.5 transition-colors hover:text-white">
                   <Phone className="size-4 shrink-0" aria-hidden="true" />
-                  +92 312 6938208
+                  +1 (215) 767-3816
                 </a>
                 <span className="inline-flex items-center gap-2.5">
                   <MapPin className="size-4 shrink-0" aria-hidden="true" />
-                  Rahim Yar Khan, Punjab, Pakistan
+                  1608 Spruce Street, Philadelphia, PA 19103
                 </span>
               </div>
             </Reveal>
@@ -121,7 +121,7 @@ export function Footer() {
               className="w-fit transition-opacity hover:opacity-85"
               aria-label="VibeAgentic home"
             >
-              <BrandLogo size={26} tone="white" />
+              <BrandLogo size={32} tone="white" />
             </a>
             <p>&copy; {new Date().getFullYear()} VibeAgentic AI. All rights reserved.</p>
             <div className="flex items-center gap-6">
