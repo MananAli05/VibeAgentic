@@ -79,7 +79,7 @@ export function Footer() {
                 </a>
                 <span className="inline-flex items-center gap-2.5">
                   <MapPin className="size-4 shrink-0" aria-hidden="true" />
-                  Rahim Yar Khan, Punjab, Pakistan
+                  1608 Spruce Street, Philadelphia, PA 19103
                 </span>
               </div>
             </Reveal>
