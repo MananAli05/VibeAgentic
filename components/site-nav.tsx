@@ -114,8 +114,8 @@ export function SiteNav() {
           className="shrink-0 transition-opacity hover:opacity-85"
           aria-label="VibeAgentic home"
         >
-          <span className="hidden sm:block"><BrandLogo size={34} /></span>
-          <span className="sm:hidden"><BrandLogo size={28} /></span>
+          <span className="hidden sm:block"><BrandLogo size={42} /></span>
+          <span className="sm:hidden"><BrandLogo size={34} /></span>
         </a>
 
         {/* Floating menu pill + dropdown */}

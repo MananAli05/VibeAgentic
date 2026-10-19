@@ -121,7 +121,7 @@ export function Footer() {
               className="w-fit transition-opacity hover:opacity-85"
               aria-label="VibeAgentic home"
             >
-              <BrandLogo size={26} tone="white" />
+              <BrandLogo size={32} tone="white" />
             </a>
             <p>&copy; {new Date().getFullYear()} VibeAgentic AI. All rights reserved.</p>
             <div className="flex items-center gap-6">

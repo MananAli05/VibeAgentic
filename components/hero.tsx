@@ -114,7 +114,7 @@ function ConsoleMock() {
         <aside className="hidden flex-col border-r border-foreground/[0.07] bg-[#fafcff] p-3 md:flex">
           <div className="mb-4 flex items-center gap-2 px-2 pt-1">
             <BrandMark className="size-5" />
-            <span className="text-sm font-extrabold tracking-tight text-foreground">VibeAgentic</span>
+            <span className="text-sm font-extrabold tracking-tight text-foreground">VibeAgentic<span className="text-primary">AI</span></span>
           </div>
           {sidebarItems.map(({ icon: Icon, label, active }) => (
             <span
