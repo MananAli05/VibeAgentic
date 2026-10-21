@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import {
   BarChart3,
   BookOpen,
@@ -21,6 +21,7 @@ import { scrollToSection } from '@/lib/router'
 import { ArrowButton } from '@/components/ui/arrow-button'
 import { Reveal } from '@/components/reveal'
 import { BrandMark } from '@/components/brand-logo'
+import { HeroScene } from '@/components/hero-scene'
 import * as React from 'react'
 
 const technologies = [
@@ -261,6 +262,72 @@ function ConsoleMock() {
   )
 }
 
+const rotatingWords = ['Automate', 'Build', 'Scale', 'AI']
+
+const wordEase = [0.65, 0, 0.35, 1] as const
+
+/**
+ * Cycles the headline verb. The slot eases to each word's measured width while the old word
+ * drifts up and fades out as the new one rises in, so the line never jumps.
+ * Holds on the last word for reduced-motion users.
+ */
+function RotatingWord() {
+  const reduced = useReducedMotion()
+  const [index, setIndex] = useState(rotatingWords.length - 1)
+  const measureRefs = useRef<(HTMLSpanElement | null)[]>([])
+  const [widths, setWidths] = useState<number[]>([])
+
+  // Measure every word at the current font size (re-measured on resize and once fonts load)
+  useEffect(() => {
+    const measure = () => setWidths(measureRefs.current.map((el) => el?.getBoundingClientRect().width ?? 0))
+    measure()
+    document.fonts?.ready.then(measure)
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  useEffect(() => {
+    if (reduced) return
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % rotatingWords.length), 3000)
+    return () => window.clearInterval(id)
+  }, [reduced])
+
+  const width = widths[index]
+
+  return (
+    <motion.span
+      className="relative inline-block whitespace-nowrap align-bottom"
+      initial={false}
+      animate={width ? { width } : undefined}
+      transition={{ duration: 0.8, ease: wordEase }}
+    >
+      {/* Invisible copies used only to measure each word's width */}
+      <span aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0">
+        {rotatingWords.map((word, i) => (
+          <span key={word} ref={(el) => { measureRefs.current[i] = el }} className="absolute left-0 top-0 whitespace-nowrap">
+            {word}
+          </span>
+        ))}
+      </span>
+      {/* Keeps the line height while the words are absolutely positioned */}
+      <span aria-hidden="true" className="invisible">{rotatingWords[index]}</span>
+      <AnimatePresence initial={false}>
+        <motion.span
+          key={rotatingWords[index]}
+          className="absolute inset-y-0 left-1/2 flex justify-center"
+          style={{ x: '-50%' }}
+          initial={{ opacity: 0, y: '0.32em', filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: '-0.32em', filter: 'blur(8px)' }}
+          transition={{ duration: 0.8, ease: wordEase }}
+        >
+          <span className="gradient-brand-text pb-[0.08em]">{rotatingWords[index]}</span>
+        </motion.span>
+      </AnimatePresence>
+    </motion.span>
+  )
+}
+
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const { openStartProject } = useModals()
@@ -278,37 +345,71 @@ export function Hero() {
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-      tl.fromTo(
-        '[data-hero-line]',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.9, stagger: 0.12 },
-        0.1
-      )
-        .fromTo('[data-hero-sub]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.5')
+      tl.fromTo('[data-hero-badge]', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6 }, 0)
+        .fromTo(
+          '[data-hero-line]',
+          { opacity: 0, y: 40, filter: 'blur(8px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, stagger: 0.12 },
+          0.1
+        )
+        .fromTo('[data-hero-sub]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.55')
         .fromTo(
           '[data-hero-cta]',
           { opacity: 0, y: 14 },
           { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 },
           '-=0.35'
         )
-        .fromTo('[data-hero-visual]', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1 }, 0.45)
+        .fromTo('[data-hero-horizon]', { opacity: 0, scaleX: 0.6 }, { opacity: 1, scaleX: 1, duration: 1.4 }, 0.35)
+        .fromTo('[data-hero-visual]', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1 }, 0.55)
         .fromTo('[data-hero-chips]', { opacity: 0 }, { opacity: 1, duration: 0.8 }, '-=0.5')
     }, el)
 
     return () => ctx.revert()
   }, [])
 
+  // Soft spotlight that follows the cursor (mouse pointers only)
+  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (e.pointerType !== 'mouse') return
+    const rect = e.currentTarget.getBoundingClientRect()
+    e.currentTarget.style.setProperty('--spot-x', `${e.clientX - rect.left}px`)
+    e.currentTarget.style.setProperty('--spot-y', `${e.clientY - rect.top}px`)
+  }
+
   return (
-    <section ref={sectionRef} id="top" className="relative overflow-hidden px-5 pt-36 md:px-8 md:pt-44">
-      {/* Subtle grid + glow backdrop */}
+    <section
+      ref={sectionRef}
+      id="top"
+      onPointerMove={handlePointerMove}
+      className="hero-stage relative overflow-hidden px-5 pt-32 md:px-8 md:pt-40"
+    >
+      {/* Backdrop: fine grid, two slow aurora glows and a cursor spotlight */}
       <div className="hero-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[820px]" />
-      <div className="pointer-events-none absolute left-1/2 top-[-180px] -z-10 h-[520px] w-[min(1100px,120vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(46,175,255,0.3),transparent)]" />
+      <div className="hero-aurora hero-aurora-a pointer-events-none absolute -z-10" />
+      <div className="hero-aurora hero-aurora-b pointer-events-none absolute -z-10" />
+      <div className="hero-spotlight pointer-events-none absolute inset-0 -z-10" />
+      {/* Three.js floating shapes in the empty space either side of the headline (wide screens only) */}
+      <HeroScene className="pointer-events-none absolute inset-x-0 top-0 -z-10 hidden h-[760px] min-[1100px]:block" />
 
       <div className="mx-auto max-w-5xl text-center">
-        <h1 className="font-sans text-[clamp(2.4rem,13vw,3.3rem)] font-extrabold leading-[0.98] headline-tight sm:text-7xl lg:text-[6.5rem]">
+        <button
+          type="button"
+          data-hero-badge
+          onClick={() => scrollToSection('#services')}
+          className="group mx-auto mb-7 inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-primary/15 bg-white/80 py-1.5 pl-1.5 pr-4 text-xs font-semibold text-foreground/80 shadow-[0_6px_20px_-12px_rgba(22,103,242,0.5)] backdrop-blur transition-colors hover:border-primary/30"
+        >
+          <span className="rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+            New
+          </span>
+          Autonomous AI agents for your business
+          <span aria-hidden="true" className="text-primary transition-transform duration-300 group-hover:translate-x-0.5">
+            &rarr;
+          </span>
+        </button>
+
+        <h1 className="font-sans text-[clamp(2.4rem,12vw,3.3rem)] font-extrabold leading-[1.02] headline-tight sm:text-7xl lg:text-[6.25rem]">
           <span data-hero-line className="block text-[#9bb4dc]">Dream It.</span>
           <span data-hero-line className="block text-foreground">
-            We Will <span className="gradient-brand-text">AI It.</span>
+            We Will <RotatingWord /> It.
           </span>
         </h1>
 
@@ -351,9 +452,15 @@ export function Hero() {
         </ul>
       </div>
 
-      {/* Product preview */}
-      <div data-hero-visual className="relative mx-auto mt-14 max-w-6xl md:mt-20 [perspective:1800px]">
-        <div className="pointer-events-none absolute inset-x-[8%] -top-10 bottom-10 -z-10 rounded-[3rem] bg-primary/25 blur-3xl" />
+      {/* Product preview rising out of a glowing horizon */}
+      <div data-hero-visual className="relative mx-auto mt-16 max-w-6xl md:mt-24 [perspective:1800px]">
+        <div
+          data-hero-horizon
+          className="hero-horizon pointer-events-none absolute left-1/2 top-[-56px] -z-10"
+          aria-hidden="true"
+        >
+          <span className="hero-horizon-beam" />
+        </div>
         <motion.div style={{ rotateX, scale, transformOrigin: '50% 0%' }}>
           <ConsoleMock />
         </motion.div>
