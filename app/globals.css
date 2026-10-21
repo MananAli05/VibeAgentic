@@ -216,6 +216,86 @@
 }
 
 /* Hero backdrop: faint blueprint grid that fades out toward the edges */
+/* ---- Hero stage: aurora glows, cursor spotlight, glowing horizon ---- */
+.hero-aurora {
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+}
+.hero-aurora-a {
+  left: 50%;
+  top: -220px;
+  width: min(900px, 110vw);
+  height: 460px;
+  margin-left: calc(min(900px, 110vw) / -2 - 160px);
+  background: radial-gradient(closest-side, rgba(46, 175, 255, 0.32), transparent);
+  animation: aurora-drift-a 18s ease-in-out infinite alternate;
+}
+.hero-aurora-b {
+  left: 50%;
+  top: -120px;
+  width: min(760px, 100vw);
+  height: 420px;
+  margin-left: calc(min(760px, 100vw) / -2 + 200px);
+  background: radial-gradient(closest-side, rgba(22, 103, 242, 0.2), transparent);
+  animation: aurora-drift-b 22s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift-a {
+  to { transform: translate3d(120px, 40px, 0) scale(1.08); }
+}
+@keyframes aurora-drift-b {
+  to { transform: translate3d(-140px, 30px, 0) scale(0.94); }
+}
+
+.hero-spotlight {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  background: radial-gradient(520px circle at var(--spot-x, 50%) var(--spot-y, 30%), rgba(22, 103, 242, 0.07), transparent 70%);
+}
+.hero-stage:hover .hero-spotlight {
+  opacity: 1;
+}
+
+/* A wide arc whose lit rim the console rises out of */
+.hero-horizon {
+  width: 150%;
+  height: 900px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(244, 248, 255, 0) 40%);
+  box-shadow:
+    0 -1px 0 0 rgba(22, 103, 242, 0.28),
+    0 -24px 60px -18px rgba(46, 175, 255, 0.55),
+    inset 0 18px 40px -24px rgba(46, 175, 255, 0.45);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+}
+/* A soft light that travels along the rim */
+.hero-horizon-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(46, 175, 255, 0.95), transparent);
+  filter: blur(0.5px);
+  animation: horizon-beam 7s ease-in-out infinite;
+}
+@keyframes horizon-beam {
+  0% { transform: translateX(80%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(370%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora,
+  .hero-horizon-beam {
+    animation: none;
+  }
+}
+
 .hero-grid {
   background-image:
     linear-gradient(rgba(22, 103, 242, 0.07) 1px, transparent 1px),
