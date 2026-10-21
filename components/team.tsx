@@ -37,16 +37,16 @@ export function Team() {
         </Reveal>
 
         <Reveal
-          className="grid grid-cols-1 gap-6 lg:grid-cols-2"
+          className="mx-auto grid max-w-md grid-cols-1 gap-6 md:max-w-none md:grid-cols-2 lg:max-w-6xl"
         >
           <article data-team-card className="order-2 card-soft overflow-hidden rounded-[2rem] p-3 lg:order-2">
-            <div className="group relative h-[340px] overflow-hidden rounded-[1.5rem] bg-tint md:h-[400px]">
+            <div className="group relative aspect-[5/6] overflow-hidden rounded-[1.5rem] bg-tint">
               <img
                 src="/mustafa-shoukat.png"
                 alt="Mustafa Shoukat"
-                className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent via-40% to-transparent" />
             </div>
             <div className="px-4 pb-5 pt-6">
               <h3 className="font-sans text-3xl font-extrabold headline-tight text-foreground">Mustafa Shoukat</h3>
@@ -72,13 +72,13 @@ export function Team() {
           </article>
 
           <article data-team-card className="order-1 card-soft overflow-hidden rounded-[2rem] p-3 lg:order-1">
-            <div className="group relative h-[340px] overflow-hidden rounded-[1.5rem] bg-tint md:h-[400px]">
+            <div className="group relative aspect-[5/6] overflow-hidden rounded-[1.5rem] bg-tint">
               <img
                 src="/maurice-cornelius.png"
                 alt="Maurice Cornelius"
-                className="absolute inset-0 h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent via-40% to-transparent" />
             </div>
             <div className="px-4 pb-5 pt-6">
               <h3 className="font-sans text-3xl font-extrabold headline-tight text-foreground">Maurice Cornelius</h3>
