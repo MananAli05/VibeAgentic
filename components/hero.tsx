@@ -92,7 +92,7 @@ function ConsoleMock() {
     <div
       className="overflow-hidden rounded-2xl border border-foreground/10 bg-white text-left shadow-[0_50px_100px_-40px_rgba(11,63,196,0.45),0_2px_6px_rgba(11,26,51,0.06)] md:rounded-3xl"
       role="img"
-      aria-label="Sample VibeAgentic agent console showing a lead qualification workflow running"
+      aria-label="Sample TryAzog agent console showing a lead qualification workflow running"
     >
       {/* Window bar */}
       <div className="flex items-center gap-3 border-b border-foreground/[0.07] bg-[#f7faff] px-4 py-3">
@@ -114,8 +114,8 @@ function ConsoleMock() {
         {/* Sidebar */}
         <aside className="hidden flex-col border-r border-foreground/[0.07] bg-[#fafcff] p-3 md:flex">
           <div className="mb-4 flex items-center gap-2 px-2 pt-1">
-            <BrandMark className="size-5" />
-            <span className="text-sm font-extrabold tracking-tight text-foreground">VibeAgentic<span className="text-primary">AI</span></span>
+            <BrandMark className="h-4 w-auto" />
+            <span className="text-sm font-extrabold tracking-tight text-foreground">Try<span className="text-primary">Azog</span></span>
           </div>
           {sidebarItems.map(({ icon: Icon, label, active }) => (
             <span

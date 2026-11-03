@@ -12,7 +12,7 @@ const reviews = [
     title: 'CTO • HealthTech Inc',
     logo: '/health-review.jpg',
     company: 'HealthTech Inc',
-    quote: 'VibeAgentic automated our patient support workflow and reduced manual work by over 60%. The team delivered exactly what they promised with zero downtime.',
+    quote: 'TryAzog automated our patient support workflow and reduced manual work by over 60%. The team delivered exactly what they promised with zero downtime.',
   },
   {
     name: 'Michael Chen',
@@ -67,7 +67,7 @@ export function Testimonials() {
                   in their words.
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/75">
-                  Companies rely on VibeAgentic to automate workflows, build custom AI systems, and scale business
+                  Companies rely on TryAzog to automate workflows, build custom AI systems, and scale business
                   operations.
                 </p>
               </div>

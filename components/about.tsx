@@ -281,7 +281,7 @@ export function About() {
             transition={{ duration: 0.7, delay: 0.35, ease }}
             className="max-w-md text-base leading-relaxed text-muted-foreground lg:pb-3"
           >
-            VibeAgentic AI is a team of software engineers, AI researchers, and automation specialists. We turn
+            TryAzog is a team of software engineers, AI researchers, and automation specialists. We turn
             complex artificial intelligence into simple, powerful tools that deliver measurable growth.
           </motion.p>
         </div>

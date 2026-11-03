@@ -48,7 +48,7 @@ export function Faq() {
             <span className="text-[#9bb4dc]">answered.</span>
           </h2>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Everything you might want to know before starting a project with VibeAgentic.
+            Everything you might want to know before starting a project with TryAzog.
           </p>
         </Reveal>
 

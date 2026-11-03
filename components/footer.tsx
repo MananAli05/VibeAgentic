@@ -119,11 +119,11 @@ export function Footer() {
               href="#top"
               onClick={(e) => handleLinkClick(e, '#top')}
               className="w-fit transition-opacity hover:opacity-85"
-              aria-label="VibeAgentic home"
+              aria-label="TryAzog home"
             >
               <BrandLogo size={32} tone="white" />
             </a>
-            <p>&copy; {new Date().getFullYear()} VibeAgentic AI. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} TryAzog. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <button
                 type="button"
@@ -148,7 +148,7 @@ export function Footer() {
           aria-hidden="true"
           className="pointer-events-none mx-auto -mb-[0.2em] mt-6 select-none whitespace-nowrap bg-gradient-to-b from-white/25 to-white/0 bg-clip-text text-center font-sans text-[16.5vw] font-extrabold leading-[0.9] tracking-[-0.05em] text-transparent min-[1400px]:text-[230px]"
         >
-          VibeAgentic
+          TryAzog
         </div>
       </div>
     </footer>

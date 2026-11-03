@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 /**
- * VibeAgentic AI emblem (orbit rings around the growth-chart core).
- * `tone="white"` sits the emblem on a white rounded tile so it stays crisp on blue panels.
+ * TryAzog "A" mark (a wide mark, roughly 1.6:1, so it is sized by height and keeps its proportions).
+ * `tone="white"` sits the mark on a white rounded tile so it stays crisp on blue panels.
  */
 export function BrandMark({
   className,
@@ -20,8 +20,8 @@ export function BrandMark({
       aria-hidden="true"
       draggable={false}
       decoding="async"
-      className={tone === 'white' ? 'block shrink-0 object-contain' : className}
-      style={tone === 'white' ? { width: '82%', height: '82%', minWidth: 0 } : style}
+      className={tone === 'white' ? 'block shrink-0 object-contain' : `object-contain ${className ?? ''}`}
+      style={tone === 'white' ? { width: '78%', height: '78%', minWidth: 0 } : style}
     />
   )
   if (tone !== 'white') return img
@@ -35,7 +35,7 @@ export function BrandMark({
   )
 }
 
-/** Full VibeAgentic AI logo: emblem + wordmark. `size` is the px height of the emblem; `tone="white"` is for blue panels. */
+/** Full TryAzog logo: mark + wordmark. `size` sets the overall height; `tone="white"` is for blue panels. */
 export function BrandLogo({
   size = 40,
   className,
@@ -51,13 +51,17 @@ export function BrandLogo({
       className={`inline-flex items-center select-none ${className ?? ''}`}
       style={{ height: size, gap: size * 0.24 }}
     >
-      <BrandMark tone={tone} className="shrink-0" style={{ width: size, height: size }} />
+      {white ? (
+        <BrandMark tone="white" className="shrink-0" style={{ width: size, height: size }} />
+      ) : (
+        <BrandMark className="w-auto shrink-0" style={{ height: size * 0.82 }} />
+      )}
       <span
         className="font-sans font-extrabold leading-none tracking-[-0.03em] whitespace-nowrap"
         style={{ fontSize: size * 0.52 }}
       >
-        <span className={white ? 'text-white' : 'text-[#050b2e]'}>VibeAgentic</span>
-        <span className={white ? 'text-[#bfe3ff]' : 'text-[#0a66ff]'}>AI</span>
+        <span className={white ? 'text-white' : 'text-[#050b2e]'}>Try</span>
+        <span className={white ? 'text-[#bfe3ff]' : 'text-[#0a66ff]'}>Azog</span>
       </span>
     </span>
   )

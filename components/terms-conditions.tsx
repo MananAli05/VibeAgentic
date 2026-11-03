@@ -29,17 +29,17 @@ export function TermsConditions() {
   const [activeId, setActiveId] = useState<string>('notice')
 
   useEffect(() => {
-    document.title = 'Terms & Conditions | VibeAgentic AI'
+    document.title = 'Terms & Conditions | TryAzog'
     const metaDesc = document.querySelector('meta[name="description"]')
     const originalDesc = metaDesc ? metaDesc.getAttribute('content') : ''
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Terms and Conditions for VibeAgentic AI. Read the agreement details regarding using our AI software and services.'
+        'Terms and Conditions for TryAzog. Read the agreement details regarding using our AI software and services.'
       )
     }
     return () => {
-      document.title = 'VibeAgentic AI — Dream it, we will AI it.'
+      document.title = 'TryAzog — Dream it, we will AI it.'
       if (metaDesc && originalDesc) {
         metaDesc.setAttribute('content', originalDesc)
       }
@@ -128,7 +128,7 @@ export function TermsConditions() {
               <div className="space-y-8 text-muted-foreground/90">
                 <section className="space-y-3">
                   <p>
-                    These Terms and Conditions (&ldquo;Terms&rdquo;) govern your access to and use of the website <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a> and all associated services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and any other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;) provided by VibeAgentic AI (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
+                    These Terms and Conditions (&ldquo;Terms&rdquo;) govern your access to and use of the website <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a> and all associated services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and any other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;) provided by TryAzog (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
                   </p>
                   <p>
                     By accessing or using the Website or Services, you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, please do not use the Website or Services.
@@ -140,7 +140,7 @@ export function TermsConditions() {
                 <section id="notice" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">Important Notice</h2>
                   <p>
-                    These Terms constitute a legally binding agreement between you and VibeAgentic AI. If you are using the Services on behalf of a business or organisation, you represent and warrant that you have authority to bind that entity to these Terms.
+                    These Terms constitute a legally binding agreement between you and TryAzog. If you are using the Services on behalf of a business or organisation, you represent and warrant that you have authority to bind that entity to these Terms.
                   </p>
                 </section>
 
@@ -214,7 +214,7 @@ export function TermsConditions() {
                   
                   <div className="space-y-3">
                     <h3 className="text-base font-bold text-foreground/90">4.1 Our Intellectual Property</h3>
-                    <p>All content, features, and functionality on the Website — including but not limited to text, graphics, logos, icons, images, audio clips, AI models, software, source code, and the overall design and architecture of the Services — are the exclusive property of VibeAgentic AI or its licensors and are protected by applicable intellectual property laws worldwide.</p>
+                    <p>All content, features, and functionality on the Website — including but not limited to text, graphics, logos, icons, images, audio clips, AI models, software, source code, and the overall design and architecture of the Services — are the exclusive property of TryAzog or its licensors and are protected by applicable intellectual property laws worldwide.</p>
                   </div>
 
                   <div className="space-y-3 pt-2">
@@ -230,12 +230,12 @@ export function TermsConditions() {
 
                   <div className="space-y-3 pt-2">
                     <h3 className="text-base font-bold text-foreground/90">4.3 Trademarks</h3>
-                    <p>&ldquo;VibeAgentic AI,&rdquo; its logo, and all related product names, service names, slogans, and trade dress are trademarks or registered trademarks of VibeAgentic AI. You may not use any of our trademarks, logos, or branding without our prior written consent.</p>
+                    <p>&ldquo;TryAzog,&rdquo; its logo, and all related product names, service names, slogans, and trade dress are trademarks or registered trademarks of TryAzog. You may not use any of our trademarks, logos, or branding without our prior written consent.</p>
                   </div>
 
                   <div className="space-y-3 pt-2">
                     <h3 className="text-base font-bold text-foreground/90">4.4 User‑Generated Content</h3>
-                    <p>If you submit content to us, you grant VibeAgentic AI a non‑exclusive, worldwide, royalty‑free licence to use, reproduce, modify, and display that content for the purpose of operating and improving the Services. You represent that you own or have the right to grant this licence.</p>
+                    <p>If you submit content to us, you grant TryAzog a non‑exclusive, worldwide, royalty‑free licence to use, reproduce, modify, and display that content for the purpose of operating and improving the Services. You represent that you own or have the right to grant this licence.</p>
                   </div>
                 </section>
 
@@ -294,7 +294,7 @@ export function TermsConditions() {
                 <section id="section-8" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">8. Disclaimer of Warranties</h2>
                   <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground/80">
-                    THE WEBSITE AND SERVICES ARE PROVIDED ON AN &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; BASIS WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, VIBEAGENTIC AI EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON‑INFRINGEMENT.
+                    THE WEBSITE AND SERVICES ARE PROVIDED ON AN &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; BASIS WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, TRYAZOG EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON‑INFRINGEMENT.
                   </p>
                 </section>
 
@@ -303,7 +303,7 @@ export function TermsConditions() {
                 <section id="section-9" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">9. Limitation of Liability</h2>
                   <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground/80">
-                    TO THE MAXIMUM EXTENT PERMITTED BY LAW, VIBEAGENTIC AI AND ITS DIRECTORS, EMPLOYEES, OR AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR LOSS OF PROFITS, REVENUE, OR DATA. OUR TOTAL CUMULATIVE LIABILITY FOR ALL CLAIMS SHALL NOT EXCEED THE GREATER OF: (A) THE TOTAL AMOUNT PAID BY YOU TO VIBEAGENTIC AI IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR (B) $100 USD.
+                    TO THE MAXIMUM EXTENT PERMITTED BY LAW, TRYAZOG AND ITS DIRECTORS, EMPLOYEES, OR AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR LOSS OF PROFITS, REVENUE, OR DATA. OUR TOTAL CUMULATIVE LIABILITY FOR ALL CLAIMS SHALL NOT EXCEED THE GREATER OF: (A) THE TOTAL AMOUNT PAID BY YOU TO TRYAZOG IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR (B) $100 USD.
                   </p>
                 </section>
 
@@ -312,7 +312,7 @@ export function TermsConditions() {
                 <section id="section-10" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">10. Indemnification</h2>
                   <p>
-                    You agree to defend, indemnify, and hold harmless VibeAgentic AI and its officers, directors, employees, and agents from and against any claims, damages, losses, costs, or fees (including reasonable legal fees) arising out of your violation of these Terms, your use of the Services, or any content you submit through the Website.
+                    You agree to defend, indemnify, and hold harmless TryAzog and its officers, directors, employees, and agents from and against any claims, damages, losses, costs, or fees (including reasonable legal fees) arising out of your violation of these Terms, your use of the Services, or any content you submit through the Website.
                   </p>
                 </section>
 
@@ -351,7 +351,7 @@ export function TermsConditions() {
                 <section id="section-13" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">13. Severability and Entire Agreement</h2>
                   <p>
-                    If any provision of these Terms is found invalid or unenforceable, it will be modified to the minimum extent necessary, and all other terms will remain in full force. These Terms constitute the entire agreement between you and VibeAgentic AI.
+                    If any provision of these Terms is found invalid or unenforceable, it will be modified to the minimum extent necessary, and all other terms will remain in full force. These Terms constitute the entire agreement between you and TryAzog.
                   </p>
                 </section>
 
@@ -370,7 +370,7 @@ export function TermsConditions() {
                   <h2 className="text-xl font-bold text-foreground tracking-tight">15. Contact Information</h2>
                   <p>For any questions or legal inquiries regarding these Terms, please contact us:</p>
                   <div className="grid gap-1 font-sans text-sm">
-                    <p><strong>Company:</strong> VibeAgentic AI</p>
+                    <p><strong>Company:</strong> TryAzog</p>
                     <p><strong>Website:</strong> <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a></p>
                     <p><strong>Legal Inquiries:</strong> <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a></p>
                     <p><strong>Support:</strong> <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a></p>

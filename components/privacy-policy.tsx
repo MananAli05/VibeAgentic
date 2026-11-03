@@ -26,17 +26,17 @@ export function PrivacyPolicy() {
   const [activeId, setActiveId] = useState<string>('scope')
 
   useEffect(() => {
-    document.title = 'Privacy Policy | VibeAgentic AI'
+    document.title = 'Privacy Policy | TryAzog'
     const metaDesc = document.querySelector('meta[name="description"]')
     const originalDesc = metaDesc ? metaDesc.getAttribute('content') : ''
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Privacy Policy for VibeAgentic AI. Learn how we collect, use, disclose, and protect your information.'
+        'Privacy Policy for TryAzog. Learn how we collect, use, disclose, and protect your information.'
       )
     }
     return () => {
-      document.title = 'VibeAgentic AI — Dream it, we will AI it.'
+      document.title = 'TryAzog — Dream it, we will AI it.'
       if (metaDesc && originalDesc) {
         metaDesc.setAttribute('content', originalDesc)
       }
@@ -65,7 +65,7 @@ export function PrivacyPolicy() {
               Privacy Policy
             </h1>
             <p className="text-sm md:text-base leading-relaxed text-muted-foreground max-w-2xl mx-auto">
-              Your privacy matters to us. This policy explains how VibeAgentic AI collects, uses, and protects your information.
+              Your privacy matters to us. This policy explains how TryAzog collects, uses, and protects your information.
             </p>
           </div>
 
@@ -125,7 +125,7 @@ export function PrivacyPolicy() {
               <div className="space-y-8 text-muted-foreground/90">
                 <section className="space-y-3">
                   <p>
-                    VibeAgentic AI (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a> and use our AI services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;).
+                    TryAzog (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a> and use our AI services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;).
                   </p>
                   <p>
                     Please read this policy carefully. By using our Website or Services, you agree to the practices described below. If you do not agree, please discontinue use immediately.
@@ -137,7 +137,7 @@ export function PrivacyPolicy() {
                 <section id="scope" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">Scope of This Policy</h2>
                   <p>
-                    This policy applies to all personal data processed by VibeAgentic AI, whether you are a visitor, registered user, client, or newsletter subscriber. It covers data collected online and through any communications you have with us.
+                    This policy applies to all personal data processed by TryAzog, whether you are a visitor, registered user, client, or newsletter subscriber. It covers data collected online and through any communications you have with us.
                   </p>
                 </section>
 
@@ -367,7 +367,7 @@ export function PrivacyPolicy() {
                   <div className="space-y-3 pt-2">
                     <h3 className="text-base font-bold text-foreground/90">7.2 International Data Transfers</h3>
                     <p>
-                      VibeAgentic AI operates globally. Your data may be transferred to and processed in countries outside your jurisdiction. Where required (e.g., for EEA residents), we rely on appropriate safeguards such as Standard Contractual Clauses (SCCs) to protect your data.
+                      TryAzog operates globally. Your data may be transferred to and processed in countries outside your jurisdiction. Where required (e.g., for EEA residents), we rely on appropriate safeguards such as Standard Contractual Clauses (SCCs) to protect your data.
                     </p>
                   </div>
                 </section>
@@ -423,7 +423,7 @@ export function PrivacyPolicy() {
                 <section id="section-10" className="space-y-3 scroll-mt-28">
                   <h2 className="text-xl font-bold text-foreground tracking-tight">10. Links to Third‑Party Websites</h2>
                   <p>
-                    Our Website may contain links to external sites not operated by VibeAgentic AI. We are not responsible for the content or privacy practices of these third‑party sites.
+                    Our Website may contain links to external sites not operated by TryAzog. We are not responsible for the content or privacy practices of these third‑party sites.
                   </p>
                 </section>
 
@@ -442,7 +442,7 @@ export function PrivacyPolicy() {
                   <h2 className="text-xl font-bold text-foreground tracking-tight">12. Contact Us</h2>
                   <p>If you have any questions or concerns regarding this policy, please contact us:</p>
                   <div className="grid gap-1 font-sans text-sm">
-                    <p><strong>Company:</strong> VibeAgentic AI</p>
+                    <p><strong>Company:</strong> TryAzog</p>
                     <p><strong>Website:</strong> <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a></p>
                     <p><strong>Email:</strong> <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a></p>
                   </div>

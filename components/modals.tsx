@@ -136,7 +136,7 @@ export function ModalManager() {
     setErrors((prev) => ({ ...prev, name: nameErr, email: emailErr, message: messageErr }))
 
     if (nameErr || emailErr || messageErr) return
-    submit('New project request — VibeAgentic website', {
+    submit('New project request — TryAzog website', {
       name: formData.name.trim(),
       email: formData.email.trim(),
       service: formData.service,
@@ -156,7 +156,7 @@ export function ModalManager() {
     setErrors((prev) => ({ ...prev, name: nameErr, email: emailErr, date: dateErr }))
 
     if (nameErr || emailErr || dateErr) return
-    submit('New strategy call booking — VibeAgentic website', {
+    submit('New strategy call booking — TryAzog website', {
       name: formData.name.trim(),
       email: formData.email.trim(),
       topic: formData.topic,

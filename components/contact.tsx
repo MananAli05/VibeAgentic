@@ -122,7 +122,7 @@ export function Contact() {
     setSending(true)
     setSendError('')
     try {
-      await sendForm('New contact request — VibeAgentic website', {
+      await sendForm('New contact request — TryAzog website', {
         name: formData.name.trim(),
         email: formData.email.trim(),
         message: formData.message.trim(),
