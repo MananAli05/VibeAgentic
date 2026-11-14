@@ -8,8 +8,8 @@ import { About } from '@/components/about'
 import { Process } from '@/components/process'
 import { Services } from '@/components/services'
 import { Industries } from '@/components/industries'
+import { WhereToStart, WhyTryAzog, ClientStories, NextSteps } from '@/components/trust'
 import { Team } from '@/components/team'
-import { Testimonials } from '@/components/testimonials'
 import { Faq } from '@/components/faq'
 import { Contact } from '@/components/contact'
 import { Footer } from '@/components/footer'
@@ -50,11 +50,15 @@ export default function App() {
               <About />
               <TechStack />
               <Services />
+              <WhereToStart />
               <Process />
+              <WhyTryAzog />
               <Industries />
-              <Testimonials />
+              <ClientStories />
+              {/* Testimonials are hidden until real, verifiable client quotes are available (website test report TC-07). */}
               <Team />
               <Faq />
+              <NextSteps />
               <Contact />
             </>
           )}

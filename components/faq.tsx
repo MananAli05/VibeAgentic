@@ -30,6 +30,26 @@ const faqs = [
     a: 'Yes. Deployment includes telemetry monitoring, staff training and continuous tuning so the system keeps improving after it goes live.',
   },
   {
+    q: 'How much does a project cost?',
+    a: 'It depends on the scope. After a short discovery call we send a written proposal with the scope, deliverables and cost, so you know the price before any work starts.',
+  },
+  {
+    q: 'How long does a typical project take?',
+    a: 'Smaller automations and chatbots usually take a few weeks; larger multi-system builds take a few months. Every proposal includes a timeline with clear milestones.',
+  },
+  {
+    q: 'How do you keep our data secure?',
+    a: 'We only access the data a project needs, use role-based access and encryption, and can deploy on your own cloud or with self-hosted models when data must stay in-house. We are happy to sign an NDA before you share anything sensitive.',
+  },
+  {
+    q: 'Can you work in regulated industries like healthcare and finance?',
+    a: 'Yes. We design around the rules that apply to you, such as HIPAA, GDPR or PCI DSS: access controls, audit logging, PII redaction and keeping data inside your environment where required.',
+  },
+  {
+    q: 'Who owns the code and models you build?',
+    a: 'Ownership of the code, models and data is agreed in writing in your project agreement before work begins, so there are no surprises later.',
+  },
+  {
     q: 'How do we get started?',
     a: 'Start a project or book a strategy call from this page. Tell us what you want to automate or build and we will recommend the right AI solution for your business.',
   },
@@ -45,7 +65,7 @@ export function Faq() {
           <h2 className="font-sans text-5xl font-extrabold leading-[0.98] headline-tight md:text-7xl">
             Questions,
             <br />
-            <span className="text-[#9bb4dc]">answered.</span>
+            <span className="text-[#5f80b8]">answered.</span>
           </h2>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Everything you might want to know before starting a project with TryAzog.

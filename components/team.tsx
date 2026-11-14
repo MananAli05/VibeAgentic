@@ -29,7 +29,7 @@ export function Team() {
       <div className="mx-auto max-w-7xl">
         <Reveal className="mb-12 max-w-4xl md:mb-16">
           <h2 className="font-sans text-4xl font-extrabold leading-[1.02] headline-tight text-balance md:text-7xl">
-            The people behind <span className="text-[#9bb4dc]">the systems.</span>
+            The people behind <span className="text-[#5f80b8]">the systems.</span>
           </h2>
           <p className="mt-4 text-sm text-muted-foreground md:text-base">
             Experienced minds. Structured solutions. Sustainable results.

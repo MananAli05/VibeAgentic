@@ -17,3 +17,4 @@ dist/
 *.log
 # Design reference, not part of the site
 referencevideo.mp4
+dist-ssr

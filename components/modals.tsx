@@ -5,6 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check, Calendar, AlertCircle, Loader2 } from 'lucide-react'
 import { useModals } from '@/lib/modal-context'
 import { sendForm, CONTACT_EMAIL } from '@/lib/send-form'
+import {
+  CALL_SLOTS,
+  OFFICE_TIMEZONE,
+  formatInZone,
+  slotInstant,
+  slotKey,
+  slotLabel,
+  todayISO,
+  visitorTimezone,
+} from '@/lib/call-slots'
 
 const inputBaseClass =
   'rounded-xl border bg-white px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 transition-all duration-300 focus:bg-white focus:outline-none w-full'
@@ -31,9 +41,11 @@ export function ModalManager() {
     timeline: '1-2 Months',
     message: '',
     date: '',
-    time: '10:00 AM',
+    time: slotKey(CALL_SLOTS[0]),
     topic: 'AI Automation Strategy',
+    company: '',
   })
+  const [timeZone] = useState(visitorTimezone)
 
   const [errors, setErrors] = useState({
     name: '',
@@ -67,14 +79,17 @@ export function ModalManager() {
       timeline: '1-2 Months',
       message: '',
       date: '',
-      time: '10:00 AM',
+      time: slotKey(CALL_SLOTS[0]),
       topic: 'AI Automation Strategy',
+      company: '',
     })
     setErrors({ name: '', email: '', message: '', date: '' })
     setTouched({ name: false, email: false, message: false, date: false })
   }, [activeModal])
 
   if (!activeModal) return null
+
+  const selectedSlot = CALL_SLOTS.find((slot) => slotKey(slot) === formData.time) ?? CALL_SLOTS[0]
 
   const validateName = (name: string): string => {
     const trimmed = name.trim()
@@ -102,6 +117,7 @@ export function ModalManager() {
 
   const validateDate = (date: string): string => {
     if (!date) return 'Please select a date'
+    if (date < todayISO()) return 'Please choose today or a later date'
     return ''
   }
 
@@ -156,12 +172,15 @@ export function ModalManager() {
     setErrors((prev) => ({ ...prev, name: nameErr, email: emailErr, date: dateErr }))
 
     if (nameErr || emailErr || dateErr) return
-    submit('New strategy call booking — TryAzog website', {
+    const instant = slotInstant(formData.date, selectedSlot)
+    submit('New strategy call request — TryAzog website', {
       name: formData.name.trim(),
       email: formData.email.trim(),
+      company: formData.company.trim() || '—',
       topic: formData.topic,
-      date: formData.date,
-      time: formData.time,
+      requested_time_eastern: formatInZone(instant, OFFICE_TIMEZONE, true),
+      requested_time_visitor: formatInZone(instant, timeZone, true),
+      visitor_timezone: timeZone,
       notes: formData.message.trim() || '—',
     })
   }
@@ -204,7 +223,7 @@ export function ModalManager() {
                   Project Request Submitted
                 </h3>
                 <p className="max-w-md text-sm text-muted-foreground leading-relaxed">
-                  Thank you. Our engineering team will review your project details and get back to you within 24 hours.
+                  Thank you. Our team will review your project details and get back to you within 24 hours.
                 </p>
                 <button
                   onClick={closeModal}
@@ -413,10 +432,15 @@ export function ModalManager() {
                   <Check className="size-7" />
                 </span>
                 <h3 className="font-sans text-2xl font-extrabold text-foreground">
-                  Strategy Call Scheduled
+                  Call Request Received
                 </h3>
                 <p className="max-w-md text-sm text-muted-foreground leading-relaxed">
-                  We have reserved your consultation call. A meeting invite has been sent to your email address.
+                  You asked for{' '}
+                  <strong className="text-foreground">
+                    {formatInZone(slotInstant(formData.date, selectedSlot), timeZone, true)}
+                  </strong>
+                  . We will email you at <strong className="text-foreground">{formData.email.trim()}</strong> to
+                  confirm the time or suggest the nearest free slot.
                 </p>
                 <button
                   onClick={closeModal}
@@ -435,7 +459,7 @@ export function ModalManager() {
                     Schedule a Consultation
                   </h2>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Discuss your technical roadmap and AI feasibility directly with our engineering team.
+                    Discuss your technical roadmap and AI feasibility with our team. Times are shown in your timezone.
                   </p>
                 </div>
 
@@ -516,7 +540,20 @@ export function ModalManager() {
                     </select>
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="block font-sans text-xs font-bold text-foreground">
+                      Company <span className="font-semibold text-muted-foreground">(Optional)</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Acme Inc."
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className={`${inputBaseClass} border-foreground/10 focus:border-primary/60`}
+                    />
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-[0.8fr_1.2fr]">
                     <div className="flex flex-col gap-1.5">
                       <label className="block font-sans text-xs font-bold text-foreground">
                         Preferred Date
@@ -524,6 +561,7 @@ export function ModalManager() {
                       <input
                         type="date"
                         required
+                        min={todayISO()}
                         value={formData.date}
                         onChange={(e) => {
                           const val = e.target.value
@@ -554,11 +592,13 @@ export function ModalManager() {
                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                         className={`${inputBaseClass} border-foreground/10 bg-white text-foreground focus:border-primary/60`}
                       >
-                        <option value="09:00 AM" className="bg-white text-foreground">09:00 AM (EST)</option>
-                        <option value="11:00 AM" className="bg-white text-foreground">11:00 AM (EST)</option>
-                        <option value="02:00 PM" className="bg-white text-foreground">02:00 PM (EST)</option>
-                        <option value="04:00 PM" className="bg-white text-foreground">04:00 PM (EST)</option>
+                        {CALL_SLOTS.map((slot) => (
+                          <option key={slotKey(slot)} value={slotKey(slot)} className="bg-white text-foreground">
+                            {slotLabel(formData.date, slot, timeZone)}
+                          </option>
+                        ))}
                       </select>
+                      <span className="text-[11px] text-muted-foreground">Your timezone: {timeZone}</span>
                     </div>
                   </div>
 
@@ -587,7 +627,7 @@ export function ModalManager() {
                     disabled={sending}
                     className="disabled:opacity-70 disabled:cursor-wait mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-white transition-all hover:bg-[#0f57d8] hover:shadow-[0_14px_30px_-12px_rgba(22,103,242,0.7)] cursor-pointer"
                   >
-                    {sending ? <><Loader2 className="size-4 animate-spin" /> Sending...</> : <>Confirm & Reserve Call Slot <Calendar className="size-4" /></>}
+                    {sending ? <><Loader2 className="size-4 animate-spin" /> Sending...</> : <>Request This Call Slot <Calendar className="size-4" /></>}
                   </button>
                 </form>
               </div>

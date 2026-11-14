@@ -216,6 +216,19 @@
 }
 
 /* Hero backdrop: faint blueprint grid that fades out toward the edges */
+/* Pre-rendered hero: hide the animated parts until the GSAP entrance timeline takes over */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-hero-badge],
+  .js [data-hero-line],
+  .js [data-hero-sub],
+  .js [data-hero-cta],
+  .js [data-hero-horizon],
+  .js [data-hero-visual],
+  .js [data-hero-chips] {
+    opacity: 0;
+  }
+}
+
 /* ---- Hero stage: aurora glows, cursor spotlight, glowing horizon ---- */
 .hero-aurora {
   border-radius: 9999px;
@@ -294,6 +307,12 @@
   .hero-horizon-beam {
     animation: none;
   }
+}
+
+/* Industries carousel: fade cards out at the top edge of the stage instead of a hard clip */
+.industries-stage {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 48px);
+  mask-image: linear-gradient(to bottom, transparent 0, black 48px);
 }
 
 .hero-grid {

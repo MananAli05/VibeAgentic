@@ -18,13 +18,24 @@ interface HelixSize {
 
 const helixDesktop: HelixSize = { width: 500, height: 340, radius: 600, rise: 96 }
 
-/** Card and spiral dimensions that fit the current viewport. */
-function helixFor(vw: number, vh: number): HelixSize {
+/**
+ * Card and spiral dimensions that fit the current viewport. `stageH` is the height of the area
+ * below the heading, so on short screens (laptops, zoomed browsers) the cards shrink instead of
+ * climbing over the heading.
+ */
+function helixFor(vw: number, stageH: number): HelixSize {
   if (vw < 640) {
-    return { width: Math.min(280, vw - 64), height: Math.round(Math.min(370, vh * 0.48)), radius: 330, rise: 64 }
+    const height = Math.round(Math.min(370, stageH * 0.72))
+    return { width: Math.min(280, vw - 64), height, radius: 330, rise: Math.round(height * 0.17) }
   }
-  if (vw < 1024) return { width: 420, height: 300, radius: 470, rise: 80 }
-  return helixDesktop
+  const base = vw < 1024 ? { width: 420, height: 300, radius: 470 } : { width: 500, height: 340, radius: 600 }
+  const height = Math.round(Math.min(base.height, stageH * 0.62))
+  return {
+    width: Math.round((base.width * height) / base.height),
+    height,
+    radius: base.radius,
+    rise: Math.round(height * 0.28),
+  }
 }
 
 /** One step of the spiral staircase: its angle and height follow how far it is from the front. */
@@ -85,15 +96,31 @@ function HelixCard({
 export function Industries() {
   const { openIndustryDetail } = useModals()
   const ref = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const [stageTop, setStageTop] = useState<number | undefined>(undefined)
   const [active, setActive] = useState(0)
   const [size, setSize] = useState<HelixSize>(helixDesktop)
   const total = industries.length
 
+  // Start the 3D stage just below the heading and size the cards to the space that is left
   useEffect(() => {
-    const update = () => setSize(helixFor(window.innerWidth, window.innerHeight))
+    const update = () => {
+      const header = headerRef.current
+      const stage = stageRef.current
+      if (!header || !stage) return
+      setStageTop(header.offsetTop + header.offsetHeight + 8)
+      setSize(helixFor(window.innerWidth, stage.clientHeight))
+    }
     update()
+    const ro = new ResizeObserver(update)
+    if (headerRef.current) ro.observe(headerRef.current)
+    if (stageRef.current) ro.observe(stageRef.current)
     window.addEventListener('resize', update, { passive: true })
-    return () => window.removeEventListener('resize', update)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
@@ -112,14 +139,18 @@ export function Industries() {
         <div className="panel-blue relative h-full overflow-hidden rounded-[2rem] md:rounded-[2.75rem]">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_58%,rgba(124,200,255,0.35),transparent)]" />
 
-          <header className="pointer-events-none relative z-[200] px-6 pt-20 md:px-12 md:pt-24">
+          <header ref={headerRef} className="pointer-events-none relative z-[200] px-6 pt-20 md:px-12 md:pt-24">
             <h2 className="max-w-2xl font-sans text-[1.65rem] font-extrabold leading-[1.02] headline-tight text-balance md:text-5xl">
               Built for the way your industry <span className="text-[#a9dcff]">actually works.</span>
             </h2>
           </header>
 
-          {/* 3D stage */}
-          <div className="absolute inset-0 top-[18%] sm:top-[10%] [perspective:1500px]">
+          {/* 3D stage: clipped below the heading (with a soft top fade) so cards can never cover it */}
+          <div
+            ref={stageRef}
+            className="industries-stage absolute inset-x-0 bottom-14 top-[22%] overflow-hidden [perspective:1500px] md:bottom-16"
+            style={stageTop === undefined ? undefined : { top: stageTop }}
+          >
             <div className="absolute inset-0 [transform-style:preserve-3d]">
               {industries.map((industry, i) => (
                 <HelixCard

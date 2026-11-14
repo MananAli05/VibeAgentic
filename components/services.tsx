@@ -15,11 +15,11 @@ const services: ServiceItem[] = [
     visual: 'generative',
     num: '01',
     title: 'Generative AI Integration',
-    hook: 'Bespoke models, not generic prompts.',
+    hook: 'Production pipelines, not generic prompts.',
     desc: 'Custom-tailored generative pipelines for content generation, image generation, data parsing, and business operations.',
     overview: 'We build custom-tailored generative pipelines for structured content generation, multimodal document parsing, automated report creation, and synthetic data generation, seamlessly integrated into your software ecosystem.',
     features: [
-      'Multimodal LLM integration (GPT-4o, Claude 3.5, Gemini)',
+      'Multimodal LLM integration (OpenAI, Claude, Gemini & open-weight models)',
       'Structured JSON output validation & schema enforcement',
       'Enterprise safety guardrails & PII redaction',
       'Automated batch parsing & content generation pipelines',
@@ -104,7 +104,7 @@ const services: ServiceItem[] = [
       'Self-hosted, private cloud LLM deployment',
       'Custom model benchmark & latency optimization',
     ],
-    techStack: ['PyTorch', 'Hugging Face', 'Llama 3', 'vLLM', 'RunPod'],
+    techStack: ['PyTorch', 'Hugging Face', 'Llama', 'vLLM', 'RunPod'],
     deliverables: ['Quantized Private Weights', 'Inference API Service', 'Model Evaluation Benchmark Report'],
   },
   {
@@ -115,12 +115,12 @@ const services: ServiceItem[] = [
     desc: 'Intelligent systems capable of reasoning, tool usage, APIs interaction, and long-term planning with LangGraph frameworks.',
     overview: 'Engineered multi-agent systems that solve complex, multi-step tasks. Our agents break down objectives, browse the web, execute code, query databases, and verify their own results.',
     features: [
-      'Multi-agent graph architectures (LangGraph / CrewAI)',
+      'Multi-agent graph architectures (LangGraph / CrewAI / AutoGen)',
       'Autonomous tool use & web interaction',
       'Persistent memory & long-term goal tracking',
       'Self-correcting reasoning loops',
     ],
-    techStack: ['LangGraph', 'AutoGen', 'Python', 'Redis', 'Docker'],
+    techStack: ['LangGraph', 'CrewAI', 'AutoGen', 'Python', 'Redis'],
     deliverables: ['Autonomous Web Research Agent', 'Multi-Agent Workflow Engine', 'Execution Logs UI'],
   },
   {

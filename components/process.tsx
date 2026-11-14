@@ -8,21 +8,25 @@ const steps = [
     num: '01',
     title: 'Discovery',
     desc: 'Deep audit of your current workflows, business data, and AI opportunities.',
+    youGet: 'Written findings and a prioritised roadmap, with ready-made and custom options.',
   },
   {
     num: '02',
     title: 'Design',
     desc: 'Architectural blueprint, security model, and interface specification.',
+    youGet: 'A signed-off scope, cost and timeline before any build starts.',
   },
   {
     num: '03',
     title: 'Develop',
     desc: 'Model integration, RAG pipeline construction, and custom software engineering.',
+    youGet: 'Regular working demos, so you see progress instead of status reports.',
   },
   {
     num: '04',
     title: 'Deploy',
     desc: 'Enterprise deployment, telemetry monitoring, staff training, and continuous tuning.',
+    youGet: 'A live system, a trained team and a support plan.',
   },
 ]
 
@@ -87,6 +91,10 @@ export function Process() {
                   </h3>
                   <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
                     {step.desc}
+                  </p>
+                  <p className="mt-4 inline-flex max-w-md items-start gap-2 rounded-2xl border border-primary/15 bg-primary/[0.05] px-4 py-2.5 text-sm font-semibold text-foreground">
+                    <span className="shrink-0 font-bold text-primary">You get:</span>
+                    {step.youGet}
                   </p>
                 </motion.div>
               </AnimatePresence>

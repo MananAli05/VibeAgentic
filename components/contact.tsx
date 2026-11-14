@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Check, AlertCircle, RotateCcw, Loader2 } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { sendForm, CONTACT_EMAIL } from '@/lib/send-form'
+import { navigate } from '@/lib/router'
 import * as React from 'react'
 
 const inputBaseClass =
@@ -17,6 +18,7 @@ export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
     message: '',
   })
 
@@ -125,6 +127,7 @@ export function Contact() {
       await sendForm('New contact request — TryAzog website', {
         name: formData.name.trim(),
         email: formData.email.trim(),
+        company: formData.company.trim() || '—',
         message: formData.message.trim(),
       })
       setSent(true)
@@ -138,7 +141,7 @@ export function Contact() {
   const handleReset = () => {
     setSent(false)
     setSendError('')
-    setFormData({ name: '', email: '', message: '' })
+    setFormData({ name: '', email: '', company: '', message: '' })
     setErrors({ name: '', email: '', message: '' })
     setTouched({ name: false, email: false, message: false })
   }
@@ -150,7 +153,7 @@ export function Contact() {
 
           <div className="max-w-xl">
             <h2 className="font-sans text-5xl font-extrabold leading-[0.98] headline-tight text-foreground md:text-7xl">
-              Let's build your <span className="text-[#9bb4dc]">AI system.</span>
+              Let's build your <span className="text-[#5f80b8]">AI system.</span>
             </h2>
             <p className="mt-5 max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
               Tell us what you want to automate or build. We'll recommend the right AI solution for your business
@@ -245,6 +248,22 @@ export function Contact() {
                   </div>
 
                   <div className="flex flex-col gap-1.5">
+                    <label htmlFor="contact-company" className="font-sans text-xs font-bold text-foreground">
+                      Company <span className="font-semibold text-muted-foreground">(Optional)</span>
+                    </label>
+                    <input
+                      id="contact-company"
+                      name="company"
+                      type="text"
+                      autoComplete="organization"
+                      placeholder="e.g. Acme Inc."
+                      value={formData.company}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
+                      className={`${inputBaseClass} border-foreground/10 hover:border-cyan-brand/30 focus:border-cyan-brand/60 focus:ring-1 focus:ring-cyan-brand/20`}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
                     <label htmlFor="contact-message" className="font-sans text-xs font-bold text-foreground">
                       Message
                     </label>
@@ -291,6 +310,17 @@ export function Contact() {
                       'Submit Request'
                     )}
                   </button>
+                  <p className="text-center text-[11px] leading-relaxed text-muted-foreground">
+                    By submitting, you agree to our{' '}
+                    <button
+                      type="button"
+                      onClick={() => navigate('/privacy-policy')}
+                      className="font-semibold text-primary underline-offset-2 hover:underline cursor-pointer"
+                    >
+                      Privacy Policy
+                    </button>
+                    . We only use your details to reply to this request.
+                  </p>
                 </form>
               )}
             </div>

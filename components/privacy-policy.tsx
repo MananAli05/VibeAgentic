@@ -36,7 +36,7 @@ export function PrivacyPolicy() {
       )
     }
     return () => {
-      document.title = 'TryAzog — Dream it, we will AI it.'
+      document.title = 'TryAzog | Custom AI Software, Agents and Automation'
       if (metaDesc && originalDesc) {
         metaDesc.setAttribute('content', originalDesc)
       }
@@ -125,7 +125,7 @@ export function PrivacyPolicy() {
               <div className="space-y-8 text-muted-foreground/90">
                 <section className="space-y-3">
                   <p>
-                    TryAzog (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a> and use our AI services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;).
+                    TryAzog (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit <a href="https://www.tryazog.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.tryazog.com</a> and use our AI services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;).
                   </p>
                   <p>
                     Please read this policy carefully. By using our Website or Services, you agree to the practices described below. If you do not agree, please discontinue use immediately.
@@ -443,7 +443,7 @@ export function PrivacyPolicy() {
                   <p>If you have any questions or concerns regarding this policy, please contact us:</p>
                   <div className="grid gap-1 font-sans text-sm">
                     <p><strong>Company:</strong> TryAzog</p>
-                    <p><strong>Website:</strong> <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a></p>
+                    <p><strong>Website:</strong> <a href="https://www.tryazog.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.tryazog.com</a></p>
                     <p><strong>Email:</strong> <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a></p>
                   </div>
                 </section>

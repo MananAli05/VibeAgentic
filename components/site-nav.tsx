@@ -12,7 +12,9 @@ import * as React from 'react'
 const links = [
   { href: '#top', label: 'Home' },
   { href: '#services', label: 'Services' },
+  { href: '#start', label: 'How to Start' },
   { href: '#process', label: 'Process' },
+  { href: '#why-us', label: 'Why Us' },
   { href: '#industries', label: 'Industries' },
   { href: '#team', label: 'Team' },
   { href: '#contact', label: 'Contact' },
@@ -99,6 +101,21 @@ export function SiteNav() {
   }
 
   return (
+    <>
+    {/* Dims and blurs the page behind the open menu; clicking it closes the menu */}
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          aria-hidden="true"
+          onClick={() => setOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-40 bg-[#0b1a33]/20 backdrop-blur-[3px]"
+        />
+      )}
+    </AnimatePresence>
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled ? 'border-b border-foreground/[0.06] bg-background/80 py-2.5 backdrop-blur-md' : 'bg-transparent py-4'
@@ -193,5 +210,6 @@ export function SiteNav() {
         </div>
       </nav>
     </header>
+    </>
   )
 }

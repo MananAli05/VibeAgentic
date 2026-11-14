@@ -39,7 +39,7 @@ export function TermsConditions() {
       )
     }
     return () => {
-      document.title = 'TryAzog — Dream it, we will AI it.'
+      document.title = 'TryAzog | Custom AI Software, Agents and Automation'
       if (metaDesc && originalDesc) {
         metaDesc.setAttribute('content', originalDesc)
       }
@@ -128,7 +128,7 @@ export function TermsConditions() {
               <div className="space-y-8 text-muted-foreground/90">
                 <section className="space-y-3">
                   <p>
-                    These Terms and Conditions (&ldquo;Terms&rdquo;) govern your access to and use of the website <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a> and all associated services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and any other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;) provided by TryAzog (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
+                    These Terms and Conditions (&ldquo;Terms&rdquo;) govern your access to and use of the website <a href="https://www.tryazog.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.tryazog.com</a> and all associated services, including AI consultation, automation and analytics setup, personalized mentorship, business automation tools, AI app integrations, and any other AI‑powered products and services (collectively, the &ldquo;Services&rdquo;) provided by TryAzog (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
                   </p>
                   <p>
                     By accessing or using the Website or Services, you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, please do not use the Website or Services.
@@ -371,7 +371,7 @@ export function TermsConditions() {
                   <p>For any questions or legal inquiries regarding these Terms, please contact us:</p>
                   <div className="grid gap-1 font-sans text-sm">
                     <p><strong>Company:</strong> TryAzog</p>
-                    <p><strong>Website:</strong> <a href="https://www.vibeagenticai.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.vibeagenticai.com</a></p>
+                    <p><strong>Website:</strong> <a href="https://www.tryazog.com" target="_blank" rel="noopener noreferrer" className="text-cyan-brand hover:underline font-semibold">https://www.tryazog.com</a></p>
                     <p><strong>Legal Inquiries:</strong> <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a></p>
                     <p><strong>Support:</strong> <a href="mailto:vibeagenticai@gmail.com" className="text-cyan-brand hover:underline font-semibold">vibeagenticai@gmail.com</a></p>
                   </div>

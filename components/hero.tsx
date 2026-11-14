@@ -407,7 +407,7 @@ export function Hero() {
         </button>
 
         <h1 className="font-sans text-[clamp(2.4rem,12vw,3.3rem)] font-extrabold leading-[1.02] headline-tight sm:text-7xl lg:text-[6.25rem]">
-          <span data-hero-line className="block text-[#9bb4dc]">Dream It.</span>
+          <span data-hero-line className="block text-[#5f80b8]">Dream It.</span>
           <span data-hero-line className="block text-foreground">
             We Will <RotatingWord /> It.
           </span>
